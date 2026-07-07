@@ -26,3 +26,43 @@ class JSONLoader:
 
         if not isinstance(data['users'], list) or not isinstance(data['relations'], list):
             raise ValueError("'users' and 'relations' must be lists!")
+
+        # =====================================================
+        # Create empty graph
+        # =====================================================
+        graph = Graph()
+
+        # =====================================================
+        # Build User objects and add to graph
+        # =====================================================
+        for user_data in data['users']:
+            user = User.from_dict(user_data)
+            graph.add_user(user)
+
+        # =====================================================
+        # Build edges (relationships)
+        # =====================================================
+        for relation in data['relations']:
+            user_id1, user_id2 = relation
+
+            # =====================================================
+            # Validate edge correctness
+            # =====================================================
+            if user_id1 == user_id2:
+                continue
+
+            user1_exists = False
+            user2_exists = False
+
+            if hasattr(graph, 'has_user'):
+                user1_exists = graph.has_user(user_id1)
+                user2_exists = graph.has_user(user_id2)
+            else:
+                user1_exists = graph.get_user(user_id1) is not None
+                user2_exists = graph.get_user(user_id2) is not None
+
+            # =====================================================
+            # Add edge to graph
+            # =====================================================
+            if user1_exists and user2_exists:
+                graph.add_edge(user_id1, user_id2)
