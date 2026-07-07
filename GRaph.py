@@ -76,16 +76,16 @@ class Graph:
     def add_edge(self, source_id: int, target_id: int) -> None:
         """Create a friendship."""
 
-        self._validate_users(first, second)
+        self._validate_users(source_id, target_id)  # ← اولین اصلاح
 
-        if first == second:
+        if source_id == target_id:  # ← دومین اصلاح
             raise InvalidEdge("A user cannot connect to itself.")
 
-        if second in self._adjacency[first]:
+        if target_id in self._adjacency[source_id]:  # ← سومین اصلاح
             raise DuplicateEdge("Friendship already exists.")
 
-        self._adjacency[first].add(second)
-        self._adjacency[second].add(first)
+        self._adjacency[source_id].add(target_id)  # ← چهارمین اصلاح
+        self._adjacency[target_id].add(source_id)  # ← پنجمین اصلاح
 
     def remove_edge(self, first: int, second: int) -> None:
         """Remove a friendship."""
