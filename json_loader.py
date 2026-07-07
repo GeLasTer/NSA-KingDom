@@ -66,3 +66,35 @@ class JSONLoader:
             # =====================================================
             if user1_exists and user2_exists:
                 graph.add_edge(user_id1, user_id2)
+
+
+        # =====================================================
+        # Return the constructed graph
+        # =====================================================
+        return graph
+
+    # =====================================================
+    # Magic Methods
+    # =====================================================
+
+    def __repr__(self):
+       
+        return f"JSONLoader()"
+
+    def __str__(self):
+      
+        return "JSONLoader for NSA Kingdom Project"
+
+# =====================================================
+# Test Section
+# =====================================================
+if __name__ == "__main__":
+    try:
+        graph = JSONLoader.load_from_file("dataset.json")
+        print("Graph created successfully!")
+        print(f"Total users: {graph.node_count()}")
+        print(f"Total relationships: {graph.edge_count()}")
+    except Exception as e:
+        print(f"Error: {e}")
+
+        
