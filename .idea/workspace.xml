@@ -4,7 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0c6b0fca-bb74-45db-8019-f83f882f903d" name="Changes" comment="fix and exchange the new section of code.&#10;create files for merge." />
+    <list default="true" id="0c6b0fca-bb74-45db-8019-f83f882f903d" name="Changes" comment="fix and exchange the new section of code.&#10;create files for merge.&#10;new text add for check.">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -33,16 +35,16 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "merge",
-    "ignore.virus.scanning.warn.message": "true",
-    "last_opened_file_path": "C:/Users/a/source/repos/NSA-KingDom"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;merge&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/a/source/repos/NSA-KingDom&quot;
   }
-}]]></component>
+}</component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -90,7 +92,31 @@
       <option name="project" value="LOCAL" />
       <updated>1783451540695</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="fix and exchange the new section of code.&#10;create files for merge.&#10;new text add for check.">
+      <option name="closed" value="true" />
+      <created>1783451755089</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1783451755089</updated>
+    </task>
+    <task id="LOCAL-00006" summary="fix and exchange the new section of code.&#10;create files for merge.&#10;new text add for check.">
+      <option name="closed" value="true" />
+      <created>1783451772120</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1783451772120</updated>
+    </task>
+    <task id="LOCAL-00007" summary="fix and exchange the new section of code.&#10;create files for merge.&#10;new text add for check.">
+      <option name="closed" value="true" />
+      <created>1783452089985</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1783452089985</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -104,7 +130,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="origin/main" />
+                        <option value="origin/misagh" />
                       </list>
                     </value>
                   </entry>
@@ -121,6 +147,8 @@
     <MESSAGE value="fix and exchange the new section of code." />
     <MESSAGE value="Delete .gitignore" />
     <MESSAGE value="fix and exchange the new section of code.&#10;create files for merge." />
-    <option name="LAST_COMMIT_MESSAGE" value="fix and exchange the new section of code.&#10;create files for merge." />
+    <MESSAGE value="fix and exchange the new section of code.&#10;create files for merge.&#10;new text add for check.&#10;create venv for test" />
+    <MESSAGE value="fix and exchange the new section of code.&#10;create files for merge.&#10;new text add for check." />
+    <option name="LAST_COMMIT_MESSAGE" value="fix and exchange the new section of code.&#10;create files for merge.&#10;new text add for check." />
   </component>
 </project>
