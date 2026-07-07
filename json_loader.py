@@ -26,7 +26,3 @@ class JSONLoader:
 
         if not isinstance(data['users'], list) or not isinstance(data['relations'], list):
             raise ValueError("'users' and 'relations' must be lists!")
-
-       
-
-        
