@@ -4,9 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0c6b0fca-bb74-45db-8019-f83f882f903d" name="Changes" comment="fix and exchange the new section of code.&#10;create files for merge.&#10;new text add for check.">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-    </list>
+    <list default="true" id="0c6b0fca-bb74-45db-8019-f83f882f903d" name="Changes" comment="fix and exchange the new section of code.&#10;create files for merge.&#10;new text add for check.&#10;fix methode add-edge that worked" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -124,7 +122,15 @@
       <option name="project" value="LOCAL" />
       <updated>1783452812542</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="fix and exchange the new section of code.&#10;create files for merge.&#10;new text add for check.&#10;fix methode add-edge that worked">
+      <option name="closed" value="true" />
+      <created>1783454792021</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1783454792021</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -157,6 +163,7 @@
     <MESSAGE value="fix and exchange the new section of code.&#10;create files for merge." />
     <MESSAGE value="fix and exchange the new section of code.&#10;create files for merge.&#10;new text add for check.&#10;create venv for test" />
     <MESSAGE value="fix and exchange the new section of code.&#10;create files for merge.&#10;new text add for check." />
-    <option name="LAST_COMMIT_MESSAGE" value="fix and exchange the new section of code.&#10;create files for merge.&#10;new text add for check." />
+    <MESSAGE value="fix and exchange the new section of code.&#10;create files for merge.&#10;new text add for check.&#10;fix methode add-edge that worked" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix and exchange the new section of code.&#10;create files for merge.&#10;new text add for check.&#10;fix methode add-edge that worked" />
   </component>
 </project>
