@@ -10,7 +10,6 @@ from pathlib import Path
 from core.graph import Graph
 from models.user import User
 
-
 class JsonLoader:
     """
     Responsible for loading users and relationships

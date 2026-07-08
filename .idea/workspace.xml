@@ -4,8 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0c6b0fca-bb74-45db-8019-f83f882f903d" name="Changes" comment="fix and exchange the new section of code.&#10;create files for merge.&#10;new text add for check.&#10;fix methode add-edge that worked.&#10;fix the code.">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="0c6b0fca-bb74-45db-8019-f83f882f903d" name="Changes" comment="fix and exchange the new section of code.&#10;create files for merge.&#10;new text add for check.&#10;fix methode add-edge that worked.&#10;fix the code.&#10;&#10;add new file and create the newfolder to use&#10;delete these file because exchange the names.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -150,7 +149,23 @@
       <option name="project" value="LOCAL" />
       <updated>1783455596384</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="fix and exchange the new section of code.&#10;create files for merge.&#10;new text add for check.&#10;fix methode add-edge that worked.&#10;fix the code.&#10;&#10;add new file and create the newfolder to use">
+      <option name="closed" value="true" />
+      <created>1783457957749</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1783457957749</updated>
+    </task>
+    <task id="LOCAL-00013" summary="fix and exchange the new section of code.&#10;create files for merge.&#10;new text add for check.&#10;fix methode add-edge that worked.&#10;fix the code.&#10;&#10;add new file and create the newfolder to use&#10;delete these file because exchange the names.">
+      <option name="closed" value="true" />
+      <created>1783458115584</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1783458115584</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -185,6 +200,8 @@
     <MESSAGE value="fix and exchange the new section of code.&#10;create files for merge.&#10;new text add for check." />
     <MESSAGE value="fix and exchange the new section of code.&#10;create files for merge.&#10;new text add for check.&#10;fix methode add-edge that worked" />
     <MESSAGE value="fix and exchange the new section of code.&#10;create files for merge.&#10;new text add for check.&#10;fix methode add-edge that worked.&#10;fix the code." />
-    <option name="LAST_COMMIT_MESSAGE" value="fix and exchange the new section of code.&#10;create files for merge.&#10;new text add for check.&#10;fix methode add-edge that worked.&#10;fix the code." />
+    <MESSAGE value="fix and exchange the new section of code.&#10;create files for merge.&#10;new text add for check.&#10;fix methode add-edge that worked.&#10;fix the code.&#10;&#10;add new file and create the newfolder to use" />
+    <MESSAGE value="fix and exchange the new section of code.&#10;create files for merge.&#10;new text add for check.&#10;fix methode add-edge that worked.&#10;fix the code.&#10;&#10;add new file and create the newfolder to use&#10;delete these file because exchange the names." />
+    <option name="LAST_COMMIT_MESSAGE" value="fix and exchange the new section of code.&#10;create files for merge.&#10;new text add for check.&#10;fix methode add-edge that worked.&#10;fix the code.&#10;&#10;add new file and create the newfolder to use&#10;delete these file because exchange the names." />
   </component>
 </project>

@@ -3,7 +3,6 @@ Graph implementation for the NSA Kingdom Project.
 """
 
 from __future__ import annotations
-
 from models.user import User
 from core.exceptions import (
     DuplicateUser,
@@ -11,7 +10,6 @@ from core.exceptions import (
     DuplicateEdge,
     InvalidEdge,
 )
-
 
 class Graph:
     """
