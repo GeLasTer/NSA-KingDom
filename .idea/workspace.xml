@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0c6b0fca-bb74-45db-8019-f83f882f903d" name="Changes" comment="fix and exchange the new section of code.&#10;create files for merge.&#10;new text add for check.&#10;fix methode add-edge that worked.&#10;fix the code.&#10;&#10;add new file and create the newfolder to use&#10;delete these file because exchange the names.&#10;create the BFS file." />
+    <list default="true" id="0c6b0fca-bb74-45db-8019-f83f882f903d" name="Changes" comment="add next of code and fix and debug this with wrtie a test to get input and output." />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -171,7 +171,31 @@
       <option name="project" value="LOCAL" />
       <updated>1783475701885</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="write depndencies of bfs fils">
+      <option name="closed" value="true" />
+      <created>1783475806653</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1783475806653</updated>
+    </task>
+    <task id="LOCAL-00016" summary="create class for bfs.">
+      <option name="closed" value="true" />
+      <created>1783475995661</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1783475995661</updated>
+    </task>
+    <task id="LOCAL-00017" summary="add next of code and fix and debug this with wrtie a test to get input and output.">
+      <option name="closed" value="true" />
+      <created>1783476134608</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1783476134608</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -185,7 +209,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="origin/misagh" />
+                        <option value="origin/merge" />
                       </list>
                     </value>
                   </entry>
@@ -209,6 +233,9 @@
     <MESSAGE value="fix and exchange the new section of code.&#10;create files for merge.&#10;new text add for check.&#10;fix methode add-edge that worked.&#10;fix the code.&#10;&#10;add new file and create the newfolder to use" />
     <MESSAGE value="fix and exchange the new section of code.&#10;create files for merge.&#10;new text add for check.&#10;fix methode add-edge that worked.&#10;fix the code.&#10;&#10;add new file and create the newfolder to use&#10;delete these file because exchange the names." />
     <MESSAGE value="fix and exchange the new section of code.&#10;create files for merge.&#10;new text add for check.&#10;fix methode add-edge that worked.&#10;fix the code.&#10;&#10;add new file and create the newfolder to use&#10;delete these file because exchange the names.&#10;create the BFS file." />
-    <option name="LAST_COMMIT_MESSAGE" value="fix and exchange the new section of code.&#10;create files for merge.&#10;new text add for check.&#10;fix methode add-edge that worked.&#10;fix the code.&#10;&#10;add new file and create the newfolder to use&#10;delete these file because exchange the names.&#10;create the BFS file." />
+    <MESSAGE value="write depndencies of bfs fils" />
+    <MESSAGE value="create class for bfs." />
+    <MESSAGE value="add next of code and fix and debug this with wrtie a test to get input and output." />
+    <option name="LAST_COMMIT_MESSAGE" value="add next of code and fix and debug this with wrtie a test to get input and output." />
   </component>
 </project>
