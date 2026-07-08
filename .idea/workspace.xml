@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0c6b0fca-bb74-45db-8019-f83f882f903d" name="Changes" comment="add next of code and fix and debug this with wrtie a test to get input and output." />
+    <list default="true" id="0c6b0fca-bb74-45db-8019-f83f882f903d" name="Changes" comment="create the dfs file." />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -195,7 +195,23 @@
       <option name="project" value="LOCAL" />
       <updated>1783476134608</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="fix.">
+      <option name="closed" value="true" />
+      <created>1783476895842</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1783476895842</updated>
+    </task>
+    <task id="LOCAL-00019" summary="create the dfs file.">
+      <option name="closed" value="true" />
+      <created>1783476958696</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1783476958696</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -236,6 +252,8 @@
     <MESSAGE value="write depndencies of bfs fils" />
     <MESSAGE value="create class for bfs." />
     <MESSAGE value="add next of code and fix and debug this with wrtie a test to get input and output." />
-    <option name="LAST_COMMIT_MESSAGE" value="add next of code and fix and debug this with wrtie a test to get input and output." />
+    <MESSAGE value="fix." />
+    <MESSAGE value="create the dfs file." />
+    <option name="LAST_COMMIT_MESSAGE" value="create the dfs file." />
   </component>
 </project>
