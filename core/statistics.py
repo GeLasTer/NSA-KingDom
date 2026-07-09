@@ -24,6 +24,7 @@ class Statistics:
 
     def __init__(self, graph: Graph) -> None:
         self._graph = graph
+        # Reuse existing BFS and DFS implementations.
         self._bfs = BFS(graph)
         self._dfs = DFS(graph)
 
@@ -54,6 +55,7 @@ class Statistics:
         users = self.total_users()
 
         if users == 0:
+            # Avoid division by zero when graph is empty.
             return 0.0
 
         return (2 * self.total_relationships()) / users
@@ -73,7 +75,8 @@ class Statistics:
 
         if self.total_users() == 0:
             return None
-
+        
+# Select the user with the highest degree.
         best_id = max(
             self._graph.user_ids(),
             key=self._graph.degree
@@ -95,11 +98,12 @@ class Statistics:
             List of user IDs belonging to the largest component.
         """
 
+    # Get all connected components using DFS.
         components = self._dfs.connected_components()
 
         if not components:
             return []
-
+    # Return the largest component.
         return max(components, key=len)
 
     def largest_group_size(self) -> int:
