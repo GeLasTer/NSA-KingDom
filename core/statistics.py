@@ -26,6 +26,7 @@ class Statistics:
         self._graph = graph
         self._bfs = BFS(graph)
         self._dfs = DFS(graph)
+
     # =====================================================
     # Basic Statistics
     # =====================================================
@@ -55,7 +56,8 @@ class Statistics:
         if users == 0:
             return 0.0
 
-        return (2 * self.total_relationships()) / users      
+        return (2 * self.total_relationships()) / users
+
     # =====================================================
     # Degree Analysis
     # =====================================================
@@ -116,6 +118,7 @@ class Statistics:
             self._graph.get_user(user_id)
             for user_id in self._largest_component()
         ]
+
     # =====================================================
     # BFS Analysis
     # =====================================================
@@ -156,8 +159,7 @@ class Statistics:
                 }
             ),
         }
-    
-"""
+""""    
     # ==========================================================
 # Test
 # ==========================================================
@@ -225,5 +227,5 @@ if __name__ == "__main__":
         print(f"  {name}: {distance}")
 
     print("\nSummary:")
-    print(stats.summary())        
-    """
+    print(stats.summary())
+    """"
