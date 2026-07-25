@@ -4,7 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0c6b0fca-bb74-45db-8019-f83f882f903d" name="Changes" comment="create the dfs file." />
+    <list default="true" id="0c6b0fca-bb74-45db-8019-f83f882f903d" name="Changes" comment="add sections of code in dfs file and debuge this.">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -33,17 +35,17 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;merge&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/a/source/repos/NSA-KingDom&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "merge",
+    "ignore.virus.scanning.warn.message": "true",
+    "last_opened_file_path": "C:/Users/a/source/repos/NSA-KingDom",
+    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable"
   }
-}</component>
+}]]></component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -211,7 +213,23 @@
       <option name="project" value="LOCAL" />
       <updated>1783476958696</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="add dependecies and crete dfs class.">
+      <option name="closed" value="true" />
+      <created>1783477025036</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1783477025036</updated>
+    </task>
+    <task id="LOCAL-00021" summary="add sections of code in dfs file and debuge this.">
+      <option name="closed" value="true" />
+      <created>1783477108745</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1783477108745</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -254,6 +272,8 @@
     <MESSAGE value="add next of code and fix and debug this with wrtie a test to get input and output." />
     <MESSAGE value="fix." />
     <MESSAGE value="create the dfs file." />
-    <option name="LAST_COMMIT_MESSAGE" value="create the dfs file." />
+    <MESSAGE value="add dependecies and crete dfs class." />
+    <MESSAGE value="add sections of code in dfs file and debuge this." />
+    <option name="LAST_COMMIT_MESSAGE" value="add sections of code in dfs file and debuge this." />
   </component>
 </project>
