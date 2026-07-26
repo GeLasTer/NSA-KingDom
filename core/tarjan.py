@@ -43,6 +43,10 @@ class Tarjan:
             if user_id not in self.visited:
                 self.parent[user_id] = None
                 self._dfs(user_id)
+            return {
+                "bridges": self.bridges,
+                "articulation_points": list(self.articulation_points)
+}    
 
     def _dfs(self, user_id):
         """
