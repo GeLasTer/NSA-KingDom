@@ -5,7 +5,7 @@ from core.statistics import Statistics
 graph = LoaderFactory.load("data/edges.txt")
 
 # برای دیتاست JSON (دو فایل جدا users/relationships):
-graph = LoaderFactory.load("data/users.json", "data/relationships.json")
+# graph = LoaderFactory.load("data/users.json", "data/relationships.json")
 
 stats = Statistics(graph)
 print(stats.summary())
