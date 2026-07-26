@@ -40,32 +40,50 @@ class Tarjan:
         Tarjan DFS algorithm.
         """
 
-def _dfs(self, user_id):
-    """
-    Tarjan DFS algorithm.
-    """
+        self.visited[user_id] = True
 
-    self.visited[user_id] = True
+        self.discovery_time[user_id] = self.time
+        self.low[user_id] = self.time
 
-    self.discovery_time[user_id] = self.time
-    self.low[user_id] = self.time
+        self.time += 1
 
-    self.time += 1
+        children = 0
 
-    children = 0
+        for neighbor in self.graph.get_neighbors(user_id):
 
-    for neighbor in self.graph.get_neighbors(user_id):
+            if neighbor not in self.visited:
 
-        if neighbor not in self.visited:
+                self.parent[neighbor] = user_id
+                children += 1
 
-            self.parent[neighbor] = user_id
-            children += 1
+                self._dfs(neighbor)
 
-            self._dfs(neighbor)
+                self.low[user_id] = min(
+                    self.low[user_id],
+                    self.low[neighbor]
+                )
 
-        elif neighbor != self.parent.get(user_id):
+                # Bridge
+                if self.low[neighbor] > self.discovery_time[user_id]:
+                    self.bridges.append((user_id, neighbor))
 
-            self.low[user_id] = min(
-                self.low[user_id],
-                self.discovery_time[neighbor]
-            )
+                # Articulation Point (root)
+                if (
+                    self.parent[user_id] is None
+                    and children > 1
+                ):
+                    self.articulation_points.add(user_id)
+
+                # Articulation Point (non-root)
+                if (
+                    self.parent[user_id] is not None
+                    and self.low[neighbor] >= self.discovery_time[user_id]
+                ):
+                    self.articulation_points.add(user_id)
+
+            elif neighbor != self.parent.get(user_id):
+
+                self.low[user_id] = min(
+                    self.low[user_id],
+                    self.discovery_time[neighbor]
+                )
