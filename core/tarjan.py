@@ -28,10 +28,19 @@ class Tarjan:
         Run Tarjan algorithm on the entire graph.
         """
 
+        self.visited.clear()
+        self.discovery_time.clear()
+        self.low.clear()
+        self.parent.clear()
+
+        self.bridges.clear()
+        self.articulation_points.clear()
+
+        self.time = 0
+
         for user_id in self.graph.user_ids():
 
             if user_id not in self.visited:
-
                 self.parent[user_id] = None
                 self._dfs(user_id)
 
@@ -87,3 +96,33 @@ class Tarjan:
                     self.low[user_id],
                     self.discovery_time[neighbor]
                 )
+
+    def get_bridges(self):
+        """
+        Return all bridges.
+        """
+        return self.bridges
+
+    def get_articulation_points(self):
+        """
+        Return all articulation points.
+        """
+        return list(self.articulation_points)
+
+    def is_articulation(self, user_id):
+        """
+        Check whether a user is an articulation point.
+        """
+        return user_id in self.articulation_points
+
+    def bridge_count(self, user_id):
+        """
+        Return number of bridges connected to a user.
+        """
+        count = 0
+
+        for first, second in self.bridges:
+            if first == user_id or second == user_id:
+                count += 1
+
+        return count
