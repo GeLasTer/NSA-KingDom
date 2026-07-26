@@ -71,7 +71,7 @@ class Graph:
     # Edge Methods
     # =====================================================
 
-    def add_edge(self, source_id: int | str, target_id: int) -> None:
+    def add_edge(self, source_id: int | str, target_id: int | str) -> None:
         """Create a friendship."""
 
         self._validate_users(source_id, target_id)  # ← اولین اصلاح
@@ -85,7 +85,7 @@ class Graph:
         self._adjacency[source_id].add(target_id)  # ← چهارمین اصلاح
         self._adjacency[target_id].add(source_id)  # ← پنجمین اصلاح
 
-    def remove_edge(self, first: int, second: int) -> None:
+    def remove_edge(self, first: int | str, second: int | str) -> None:
         """Remove a friendship."""
 
         self._validate_users(first, second)
@@ -93,7 +93,7 @@ class Graph:
         self._adjacency[first].discard(second)
         self._adjacency[second].discard(first)
 
-    def has_edge(self, first: int, second: int) -> bool:
+    def has_edge(self, first: int | str, second: int | str) -> bool:
         """Check if two users are connected."""
 
         self._validate_users(first, second)
@@ -107,7 +107,7 @@ class Graph:
 
         return self._adjacency[user_id].copy()
 
-    def degree(self, user_id: int) -> int:
+    def degree(self, user_id: int | str) -> int:
         """Return number of friendships."""
 
         self._validate_users(user_id)

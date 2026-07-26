@@ -39,27 +39,3 @@ class User:
         برای اینکه وقتی کاربر رو پرینت می‌کنیم، خروجی خوانا باشه
         """
         return f"User({self.__dict__})"
-
-
-# ==========================================
-# بخش تست کد (بر اساس خروجی مورد انتظار توی عکست)
-# ==========================================
-# if __name__ == "__main__":
-#     # تست با دیتاست اول (دارای name, age, city)
-#     data1 = {"id": 1, "name": "Ali", "age": 25, "city": "Tehran"}
-#     user1 = User.from_dict(data1)
-#
-#     print("--- Test 1 ---")
-#     print(user1.id)  # خروجی: 1
-#     print(user1.name)  # خروجی: Ali
-#     print(user1.to_dict())  # خروجی به شکل دیکشنری
-#
-#     print("\n--- Test 2 ---")
-#
-#     # تست با دیتاست دوم (دارای username, gender)
-#     data2 = {"id": 2, "username": "Ali123", "gender": "male"}
-#     user2 = User.from_dict(data2)
-#
-#     print(user2.id)  # خروجی: 2
-#     print(user2.username)  # خروجی: Ali123
-#     print(user2.to_dict())  # خروجی به شکل دیکشنری

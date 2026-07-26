@@ -49,7 +49,7 @@ class BFS:
     # =====================================================
 
     def shortest_path(
-            self, source_id:int | str, destination_id: int
+            self, source_id:int | str, destination_id: int | str
     ) -> list[User] | None:
         """
         Find the shortest path between source_id and destination_id.
@@ -85,7 +85,7 @@ class BFS:
         return None
 
     def _reconstruct_path(
-            self, parent: dict[int, int], source_id:int | str, destination_id: int
+            self, parent: dict[int, int], source_id: int | str, destination_id: int | str
     ) -> list[User]:
         """
         Rebuild the actual path from source to destination
@@ -159,37 +159,3 @@ class BFS:
             self._display_name(self._graph.get_user(user_id)): dist
             for user_id, dist in distances.items()
         }
-
-
-# ==========================================
-# تست کد
-# ==========================================
-# if __name__ == "__main__":
-#     from core.graph import Graph
-#     from models.user import User
-#
-#     graph = Graph()
-#
-#     for uid, name in [
-#         (1, "Ali"), (2, "Sara"), (3, "Reza"),
-#         (4, "King"), (5, "Minister"),
-#     ]:
-#         graph.add_user(User(id=uid, name=name))
-#
-#     graph.add_edge(1, 2)  # Ali - Sara
-#     graph.add_edge(2, 3)  # Sara - Reza
-#     graph.add_edge(3, 4)  # Reza - King
-#     graph.add_edge(4, 5)  # King - Minister
-#
-#     bfs = BFS(graph)
-#
-#     print("--- Traverse ---")
-#     print(bfs.traverse(1))
-#
-#     print("\n--- Shortest Path (Ali -> King) ---")
-#     path = bfs.shortest_path(1, 4)
-#     print(bfs.format_path(path))
-#
-#     print("\n--- Distance To All (from Ali) ---")
-#     distances = bfs.distance_to_all(1)
-#     print(bfs.format_distances(distances))
