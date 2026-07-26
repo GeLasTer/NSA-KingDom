@@ -40,4 +40,32 @@ class Tarjan:
         Tarjan DFS algorithm.
         """
 
-        pass
+def _dfs(self, user_id):
+    """
+    Tarjan DFS algorithm.
+    """
+
+    self.visited[user_id] = True
+
+    self.discovery_time[user_id] = self.time
+    self.low[user_id] = self.time
+
+    self.time += 1
+
+    children = 0
+
+    for neighbor in self.graph.get_neighbors(user_id):
+
+        if neighbor not in self.visited:
+
+            self.parent[neighbor] = user_id
+            children += 1
+
+            self._dfs(neighbor)
+
+        elif neighbor != self.parent.get(user_id):
+
+            self.low[user_id] = min(
+                self.low[user_id],
+                self.discovery_time[neighbor]
+            )
