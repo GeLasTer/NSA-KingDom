@@ -110,31 +110,31 @@ class DFS:
 # ==========================================
 # تست کد
 # ==========================================
-if __name__ == "__main__":
-    from core.graph import Graph
-    from models.user import User
-
-    graph = Graph()
-
-    # کامپوننت اول: Ali - Sara - Reza - King
-    for uid, name in [(1, "Ali"), (2, "Sara"), (3, "Reza"), (4, "King")]:
-        graph.add_user(User(id=uid, name=name))
-
-    graph.add_edge(1, 2)
-    graph.add_edge(2, 3)
-    graph.add_edge(3, 4)
-
-    # کامپوننت دوم: جدا از بقیه (Minister - Spy)
-    graph.add_user(User(id=5, name="Minister"))
-    graph.add_user(User(id=6, name="Spy"))
-    graph.add_edge(5, 6)
-
-    dfs = DFS(graph)
-
-    print("--- Traverse (from Ali) ---")
-    order = dfs.traverse(1)
-    print(dfs.format_traverse(order))
-
-    print("\n--- Connected Components ---")
-    components = dfs.connected_components()
-    print(dfs.format_components(components))
+# if __name__ == "__main__":
+#     from core.graph import Graph
+#     from models.user import User
+#
+#     graph = Graph()
+#
+#     # کامپوننت اول: Ali - Sara - Reza - King
+#     for uid, name in [(1, "Ali"), (2, "Sara"), (3, "Reza"), (4, "King")]:
+#         graph.add_user(User(id=uid, name=name))
+#
+#     graph.add_edge(1, 2)
+#     graph.add_edge(2, 3)
+#     graph.add_edge(3, 4)
+#
+#     # کامپوننت دوم: جدا از بقیه (Minister - Spy)
+#     graph.add_user(User(id=5, name="Minister"))
+#     graph.add_user(User(id=6, name="Spy"))
+#     graph.add_edge(5, 6)
+#
+#     dfs = DFS(graph)
+#
+#     print("--- Traverse (from Ali) ---")
+#     order = dfs.traverse(1)
+#     print(dfs.format_traverse(order))
+#
+#     print("\n--- Connected Components ---")
+#     components = dfs.connected_components()
+#     print(dfs.format_components(components))
