@@ -21,7 +21,7 @@ class Recommendation:
 
     def recommend(
         self,
-        user_id: int,
+        user_id: int | str,
         limit: int = 5
     ) -> list[tuple[User, int]]:
         """

@@ -127,7 +127,7 @@ class Statistics:
     # BFS Analysis
     # =====================================================
 
-    def distance_analysis(self, source_id: int) -> dict[int, int]:
+    def distance_analysis(self, source_id: int | str) -> dict[int, int]:
         """
         Return shortest distance from source user
         to every reachable user.

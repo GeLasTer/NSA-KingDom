@@ -39,7 +39,7 @@ class Graph:
         self._users[user.id] = user
         self._adjacency[user.id] = set()
 
-    def remove_user(self, user_id: int) -> None:
+    def remove_user(self, user_id: int | str) -> None:
         """Remove a user and all of their friendships."""
 
         self._validate_users(user_id)
@@ -50,14 +50,14 @@ class Graph:
         del self._adjacency[user_id]
         del self._users[user_id]
 
-    def get_user(self, user_id: int) -> User:
+    def get_user(self, user_id: int | str) -> User:
         """Return the User object."""
 
         self._validate_users(user_id)
 
         return self._users[user_id]
 
-    def has_user(self, user_id: int) -> bool:
+    def has_user(self, user_id: int | str) -> bool:
         """Check whether a user exists."""
 
         return user_id in self._users
@@ -71,7 +71,7 @@ class Graph:
     # Edge Methods
     # =====================================================
 
-    def add_edge(self, source_id: int, target_id: int) -> None:
+    def add_edge(self, source_id: int | str, target_id: int) -> None:
         """Create a friendship."""
 
         self._validate_users(source_id, target_id)  # ← اولین اصلاح
@@ -100,7 +100,7 @@ class Graph:
 
         return second in self._adjacency[first]
 
-    def get_neighbors(self, user_id: int) -> set[int]:
+    def get_neighbors(self, user_id: int | str) -> set[int]:
         """Return neighbors of a user."""
 
         self._validate_users(user_id)
@@ -140,7 +140,7 @@ class Graph:
         self._users.clear()
         self._adjacency.clear()
 
-    def _validate_users(self, *user_ids: int) -> None:
+    def _validate_users(self, *user_ids: int | str) -> None:
         """Validate that all given users exist."""
 
         for user_id in user_ids:
@@ -151,7 +151,7 @@ class Graph:
     # Magic Methods
     # =====================================================
 
-    def __contains__(self, user_id: int) -> bool:
+    def __contains__(self, user_id: int | str) -> bool:
         return user_id in self._users
 
     def __len__(self) -> int:

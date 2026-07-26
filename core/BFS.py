@@ -21,7 +21,7 @@ class BFS:
     # Raw BFS Traversal
     # =====================================================
 
-    def traverse(self, source_id: int) -> list[int]:
+    def traverse(self, source_id:int | str) -> list[int]:
         """
         Perform a raw BFS starting from source_id.
         Returns the list of reachable user ids in visit order.
@@ -49,7 +49,7 @@ class BFS:
     # =====================================================
 
     def shortest_path(
-            self, source_id: int, destination_id: int
+            self, source_id:int | str, destination_id: int
     ) -> list[User] | None:
         """
         Find the shortest path between source_id and destination_id.
@@ -85,7 +85,7 @@ class BFS:
         return None
 
     def _reconstruct_path(
-            self, parent: dict[int, int], source_id: int, destination_id: int
+            self, parent: dict[int, int], source_id:int | str, destination_id: int
     ) -> list[User]:
         """
         Rebuild the actual path from source to destination
@@ -105,7 +105,7 @@ class BFS:
     # Distance To All
     # =====================================================
 
-    def distance_to_all(self, source_id: int) -> dict[int, int]:
+    def distance_to_all(self, source_id:int | str) -> dict[int, int]:
         """
         Compute the distance (number of edges) from source_id
         to every other reachable user.
