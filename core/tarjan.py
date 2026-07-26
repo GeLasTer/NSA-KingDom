@@ -22,3 +22,22 @@ class Tarjan:
 
         self.bridges = []
         self.articulation_points = set()
+
+    def run(self):
+        """
+        Run Tarjan algorithm on the entire graph.
+        """
+
+        for user_id in self.graph.user_ids():
+
+            if user_id not in self.visited:
+
+                self.parent[user_id] = None
+                self._dfs(user_id)
+
+    def _dfs(self, user_id):
+        """
+        Tarjan DFS algorithm.
+        """
+
+        pass
