@@ -21,7 +21,7 @@ class BFS:
     # Raw BFS Traversal
     # =====================================================
 
-    def traverse(self, source_id:int | str) -> list[int]:
+    def traverse(self, source_id:int | str) -> list[int | str]:
         """
         Perform a raw BFS starting from source_id.
         Returns the list of reachable user ids in visit order.
@@ -29,9 +29,9 @@ class BFS:
 
         self._graph._validate_users(source_id)
 
-        visited: set[int] = {source_id}
-        queue: deque[int] = deque([source_id])
-        order: list[int] = []
+        visited: set[int | str] = {source_id}
+        queue: deque[int | str] = deque([source_id])
+        order: list[int | str] = []
 
         while queue:
             current = queue.popleft()
@@ -62,9 +62,9 @@ class BFS:
         if source_id == destination_id:
             return [self._graph.get_user(source_id)]
 
-        visited: set[int] = {source_id}
-        queue: deque[int] = deque([source_id])
-        parent: dict[int, int] = {}
+        visited: set[int | str] = {source_id}
+        queue: deque[int | str] = deque([source_id])
+        parent: dict[int | str, int | str] = {}
 
         while queue:
             current = queue.popleft()
@@ -92,7 +92,7 @@ class BFS:
         using the parent map collected during BFS.
         """
 
-        path_ids: list[int] = [destination_id]
+        path_ids: list[int | str] = [destination_id]
 
         while path_ids[-1] != source_id:
             path_ids.append(parent[path_ids[-1]])
@@ -105,7 +105,7 @@ class BFS:
     # Distance To All
     # =====================================================
 
-    def distance_to_all(self, source_id:int | str) -> dict[int, int]:
+    def distance_to_all(self, source_id:int | str) -> dict[int | str, int | str]:
         """
         Compute the distance (number of edges) from source_id
         to every other reachable user.
@@ -114,9 +114,9 @@ class BFS:
 
         self._graph._validate_users(source_id)
 
-        visited: set[int] = {source_id}
-        queue: deque[int] = deque([source_id])
-        distance: dict[int, int] = {}
+        visited: set[int | str] = {source_id}
+        queue: deque[int | str] = deque([source_id])
+        distance: dict[int | str, int | str] = {}
 
         while queue:
             current = queue.popleft()

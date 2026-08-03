@@ -23,8 +23,8 @@ class Graph:
     """
 
     def __init__(self) -> None:
-        self._users: dict[int, User] = {}
-        self._adjacency: dict[int, set[int]] = {}
+        self._users: dict[int | str, User] = {}
+        self._adjacency: dict[int | str, set[int | str]] = {}
 
     # =====================================================
     # User Methods
@@ -174,5 +174,5 @@ class Graph:
     def users(self) -> list[User]:
         return list(self._users.values())
 
-    def user_ids(self) -> list[int]:
+    def user_ids(self) -> list[int | str]:
          return list(self._users.keys())

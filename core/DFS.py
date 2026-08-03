@@ -21,7 +21,7 @@ class DFS:
     # Simple DFS Traversal (Iterative با Stack صریح)
     # =====================================================
 
-    def traverse(self, start_id: int | str) -> list[int]:
+    def traverse(self, start_id: int | str) -> list[int | str]:
         """
         Perform a simple iterative DFS starting from start_id.
         Returns the list of reachable user ids in visit order.
@@ -29,9 +29,9 @@ class DFS:
 
         self._graph._validate_users(start_id)
 
-        visited: set[int] = set()
-        stack: list[int] = [start_id]
-        order: list[int] = []
+        visited: set[int | str] = set()
+        stack: list[int | str] = [start_id]
+        order: list[int | str] = []
 
         while stack:
             current = stack.pop()
@@ -58,15 +58,15 @@ class DFS:
     # Connected Components
     # =====================================================
 
-    def connected_components(self) -> list[list[int]]:
+    def connected_components(self) -> list[list[int | str]]:
         """
         Find all connected components in the graph.
         Returns a list of components, where each component is
         a list of user ids belonging to the same connected group.
         """
 
-        visited: set[int] = set()
-        components: list[list[int]] = []
+        visited: set[int | str] = set()
+        components: list[list[int | str]] = []
 
         for node_id in self._graph.user_ids():
             if node_id not in visited:
@@ -86,7 +86,7 @@ class DFS:
 
         return getattr(user, "name", None) or getattr(user, "username", None) or str(user.id)
 
-    def format_traverse(self, order: list[int]) -> str:
+    def format_traverse(self, order: list[int | str]) -> str:
         """
         Format a traversal order as: 'Ali -> Sara -> Reza -> King'
         """
@@ -95,7 +95,7 @@ class DFS:
             self._display_name(self._graph.get_user(user_id)) for user_id in order
         )
 
-    def format_components(self, components: list[list[int]]) -> list[list[str]]:
+    def format_components(self, components: list[list[int | str]]) -> list[list[str]]:
         """
         Convert components (list of id-lists) into name-based lists
         for display purposes.

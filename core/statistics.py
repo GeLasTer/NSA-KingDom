@@ -72,23 +72,20 @@ class Statistics:
             User object if graph is not empty.
             None if graph has no users.
         """
-
         if self.total_users() == 0:
             return None
-        
 # Select the user with the highest degree.
         best_id = max(
             self._graph.user_ids(),
             key=self._graph.degree
         )
-
         return self._graph.get_user(best_id)
 
     # =====================================================
     # Connected Components
     # =====================================================
 
-    def _largest_component(self) -> list[int]:
+    def _largest_component(self) -> list[int | str]:
         """
         Internal helper.
 
@@ -97,7 +94,6 @@ class Statistics:
         Returns:
             List of user IDs belonging to the largest component.
         """
-
     # Get all connected components using DFS.
         components = self._dfs.connected_components()
 

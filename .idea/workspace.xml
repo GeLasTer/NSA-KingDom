@@ -4,13 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0c6b0fca-bb74-45db-8019-f83f882f903d" name="Changes" comment="create loader factory that Intelligently select between different datasets.&#10;create new folder loaders and move json_loader.py to this folder">
-      <change beforePath="$PROJECT_DIR$/core/BFS.py" beforeDir="false" afterPath="$PROJECT_DIR$/core/BFS.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/DFS.py" beforeDir="false" afterPath="$PROJECT_DIR$/core/DFS.py" afterDir="false" />
+    <list default="true" id="0c6b0fca-bb74-45db-8019-f83f882f903d" name="Changes" comment="fix.">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core/graph.py" beforeDir="false" afterPath="$PROJECT_DIR$/core/graph.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/statistics.py" beforeDir="false" afterPath="$PROJECT_DIR$/core/statistics.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/user.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/user.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -40,17 +36,18 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "merge",
-    "ignore.virus.scanning.warn.message": "true",
-    "last_opened_file_path": "C:/Users/a/source/repos/NSA-KingDom",
-    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;Python.main.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;merge&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/a/source/repos/NSA-KingDom&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;
   }
-}]]></component>
+}</component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -274,7 +271,31 @@
       <option name="project" value="LOCAL" />
       <updated>1785032859735</updated>
     </task>
-    <option name="localTasksCounter" value="27" />
+    <task id="LOCAL-00027" summary="Making changes to multiple files">
+      <option name="closed" value="true" />
+      <created>1785033625981</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1785033625981</updated>
+    </task>
+    <task id="LOCAL-00028" summary="exchange name edege to edeges">
+      <option name="closed" value="true" />
+      <created>1785033811392</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1785033811392</updated>
+    </task>
+    <task id="LOCAL-00029" summary="fix.">
+      <option name="closed" value="true" />
+      <created>1785033900276</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1785033900276</updated>
+    </task>
+    <option name="localTasksCounter" value="30" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -315,7 +336,6 @@
     <MESSAGE value="write depndencies of bfs fils" />
     <MESSAGE value="create class for bfs." />
     <MESSAGE value="add next of code and fix and debug this with wrtie a test to get input and output." />
-    <MESSAGE value="fix." />
     <MESSAGE value="create the dfs file." />
     <MESSAGE value="add dependecies and crete dfs class." />
     <MESSAGE value="add sections of code in dfs file and debuge this." />
@@ -324,6 +344,9 @@
     <MESSAGE value="for read the dataset I create a new loader that accept it.&#10;and this called edge_list_loader.py" />
     <MESSAGE value="create main.py and add edge.txt for check code and create graph to analysis program and debuge this." />
     <MESSAGE value="create loader factory that Intelligently select between different datasets.&#10;create new folder loaders and move json_loader.py to this folder" />
-    <option name="LAST_COMMIT_MESSAGE" value="create loader factory that Intelligently select between different datasets.&#10;create new folder loaders and move json_loader.py to this folder" />
+    <MESSAGE value="Making changes to multiple files" />
+    <MESSAGE value="exchange name edege to edeges" />
+    <MESSAGE value="fix." />
+    <option name="LAST_COMMIT_MESSAGE" value="fix." />
   </component>
 </project>
