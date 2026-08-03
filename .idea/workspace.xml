@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0c6b0fca-bb74-45db-8019-f83f882f903d" name="Changes" comment="add tarjan to main code." />
+    <list default="true" id="0c6b0fca-bb74-45db-8019-f83f882f903d" name="Changes" comment="add storages as database." />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -317,7 +317,15 @@
       <option name="project" value="LOCAL" />
       <updated>1785776784127</updated>
     </task>
-    <option name="localTasksCounter" value="33" />
+    <task id="LOCAL-00033" summary="add storages as database.">
+      <option name="closed" value="true" />
+      <created>1785777670726</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1785777670726</updated>
+    </task>
+    <option name="localTasksCounter" value="34" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -344,7 +352,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="fix and exchange the new section of code." />
     <MESSAGE value="Delete .gitignore" />
     <MESSAGE value="fix and exchange the new section of code.&#10;create files for merge." />
     <MESSAGE value="fix and exchange the new section of code.&#10;create files for merge.&#10;new text add for check.&#10;create venv for test" />
@@ -369,6 +376,7 @@
     <MESSAGE value="exchange name edege to edeges" />
     <MESSAGE value="fix." />
     <MESSAGE value="add tarjan to main code." />
-    <option name="LAST_COMMIT_MESSAGE" value="add tarjan to main code." />
+    <MESSAGE value="add storages as database." />
+    <option name="LAST_COMMIT_MESSAGE" value="add storages as database." />
   </component>
 </project>
