@@ -24,4 +24,31 @@ class Recommendation:
         user_id: int,
         limit: int = 5
     ) -> list[tuple[User, int]]:
-     pass 
+        """
+        Recommend users based on the number
+        of mutual friends.
+        """
+
+        if not self.graph.has_user(user_id):
+            raise UserNotFound(
+                f"User {user_id} does not exist."
+            )
+
+        friends = self.graph.get_neighbors(user_id)
+
+        scores: dict[int, int] = {}
+
+        for friend in friends:
+
+            for candidate in self.graph.get_neighbors(friend):
+
+                if candidate == user_id:
+                    continue
+
+                if candidate in friends:
+                    continue
+
+                scores[candidate] = (
+                    scores.get(candidate, 0) + 1
+                )
+pass
