@@ -51,4 +51,21 @@ class Recommendation:
                 scores[candidate] = (
                     scores.get(candidate, 0) + 1
                 )
-pass
+
+        ranked = sorted(
+            scores.items(),
+            key=lambda item: (-item[1], item[0])
+        )
+
+        result = []
+
+        for candidate_id, score in ranked[:limit]:
+
+            result.append(
+                (
+                    self.graph.get_user(candidate_id),
+                    score
+                )
+            )
+
+        return result
