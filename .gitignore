@@ -1,3 +1,5 @@
 venv/
 __pycache__/
 *.pycgit status
+__pycache__/
+social_network_data.json
