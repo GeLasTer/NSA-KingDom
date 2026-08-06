@@ -45,6 +45,8 @@ NSA-KingDom <br>
              Friend Recommendation
                        │
               Network Statistics
+                       │
+              Analaysis connecttion
                
 ```
 
