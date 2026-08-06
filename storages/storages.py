@@ -69,7 +69,7 @@ class GraphStorage:
 
             if "users" not in data or "edges" not in data:
                 return False
-
+#
             user_ids = set()
             for user in data["users"]:
                 if "id" not in user:
