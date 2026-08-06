@@ -1,8 +1,7 @@
 import os
 import json
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, request, jsonify, render_template
 
-# وارد کردن کلاس‌های هسته پروژه شما
 from core.graph import Graph
 from core.BFS import BFS
 from core.DFS import DFS
@@ -12,270 +11,256 @@ from models.user import User
 from core.exceptions import DuplicateUser, UserNotFound, DuplicateEdge, InvalidEdge
 
 app = Flask(__name__)
+DATA_FILE = 'social_network_data.json'
 
-# مقداردهی اولیه گراف
+# ساخت نمونه سراسری گراف
 graph = Graph()
-DATA_FILE = "social_network_data.json"
 
-# ==========================================
-# JSON Persistence (بخش 11 صورت‌مسئله)
-# ==========================================
 def save_data():
-    """ذخیره وضعیت فعلی گراف در فایل JSON"""
-    data = {"users": [], "edges": []}
-    
-    # ذخیره کاربران
-    for user in graph.get_users():
-        data["users"].append({
-            "id": user.id, 
-            "name": getattr(user, 'name', str(user.id)),
-            "username": getattr(user, 'username', '')
-        })
+    """ذخیره تمام کاربران و روابط در فایل JSON"""
+    try:
+        data = {"nodes": [], "edges": []}
         
-    # ذخیره یال‌ها (روابط)
-    seen_edges = set()
-    for user_id in graph.user_ids():
-        for friend_id in graph.get_neighbors(user_id):
-            edge = tuple(sorted([str(user_id), str(friend_id)]))
-            if edge not in seen_edges:
-                data["edges"].append({"source": edge[0], "target": edge[1]})
-                seen_edges.add(edge)
-                
-    with open(DATA_FILE, "w", encoding="utf-8") as f:
-        json.dump(data, f, ensure_ascii=False, indent=4)
+        # ذخیره کاربران
+        for u in graph.users():
+            data["nodes"].append({"id": u.id, "name": getattr(u, 'name', str(u.id))})
+        
+        # ذخیره روابط (جلوگیری از ذخیره روابط دوطرفه تکراری)
+        visited_edges = set()
+        for u in graph.users():
+            for v in graph.get_neighbors(u.id):
+                # مرتب سازی آیدی ها تا (1,2) با (2,1) یکی در نظر گرفته شود
+                pair = tuple(sorted([str(u.id), str(v)]))
+                if pair not in visited_edges:
+                    visited_edges.add(pair)
+                    data["edges"].append({"source": u.id, "target": v})
+                    
+        with open(DATA_FILE, 'w', encoding='utf-8') as f:
+            json.dump(data, f, ensure_ascii=False, indent=4)
+    except Exception as e:
+        print(f"Error saving data: {e}")
 
 def load_data():
-    """بازیابی گراف از فایل JSON در صورت وجود"""
+    """بازیابی کاربران و روابط از فایل JSON"""
     if os.path.exists(DATA_FILE):
-        with open(DATA_FILE, "r", encoding="utf-8") as f:
-            try:
+        try:
+            with open(DATA_FILE, 'r', encoding='utf-8') as f:
                 data = json.load(f)
-                for u in data.get("users", []):
-                    # ساخت آبجکت کاربر. 
-                    # اگر کلاس User شما پارامترهای دیگری دارد اینجا تنظیم کنید.
-                    user = User(u["id"])
-                    user.name = u.get("name", "")
-                    user.username = u.get("username", "")
-                    graph.add_user(user)
-                    
-                for e in data.get("edges", []):
+                
+                # لود کردن کاربران
+                for node in data.get("nodes", []):
+                    # پاس دادن id به کلاس User برای رفع خطای __init__
+                    u = User(id=node["id"])
+                    u.name = node.get("name", str(node["id"]))
                     try:
-                        graph.add_edge(e["source"], e["target"])
-                    except Exception:
+                        graph.add_user(u)
+                    except DuplicateUser:
                         pass
-            except json.JSONDecodeError:
-                pass
+                
+                # لود کردن یال ها
+                for edge in data.get("edges", []):
+                    try:
+                        graph.add_edge(edge["source"], edge["target"])
+                    except (UserNotFound, DuplicateEdge, InvalidEdge):
+                        pass
+        except Exception as e:
+            print(f"Error loading data: {e}")
 
-# لود کردن دیتا هنگام اجرای برنامه
-load_data()
-
-# توابع کمکی برای تبدیل ID
 def parse_id(uid):
-    """تلاش برای تبدیل آیدی به عدد (در صورت نیاز)"""
-    try:
+    """تبدیل آیدی به عدد در صورت امکان (برای سازگاری با نوع داده‌ها)"""
+    if isinstance(uid, str) and uid.isdigit():
         return int(uid)
-    except ValueError:
-        return uid
+    return uid
 
-# ==========================================
-# Web UI Route
-# ==========================================
 @app.route("/")
 def index():
+    """سرو کردن فایل HTML فرانت‌اند"""
     return render_template("index.html")
 
-# ==========================================
-# API Endpoints
-# ==========================================
-
 @app.route("/api/graph", methods=["GET"])
-def get_graph_data():
-    """دریافت دیتای گراف برای رسم در vis.js"""
-    nodes = []
-    for user in graph.get_users():
-        nodes.append({
-            "id": user.id,
-            "label": getattr(user, 'name', str(user.id)),
-            "title": f"ID: {user.id}"
-        })
-        
+def get_graph():
+    """ارسال اطلاعات گراف با فرمت قابل فهم برای Vis.js"""
+    nodes = [{"id": u.id, "label": getattr(u, 'name', str(u.id))} for u in graph.users()]
     edges = []
-    seen = set()
-    for user_id in graph.user_ids():
-        for friend_id in graph.get_neighbors(user_id):
-            edge_id = tuple(sorted([str(user_id), str(friend_id)]))
-            if edge_id not in seen:
-                edges.append({"from": edge_id[0], "to": edge_id[1]})
-                seen.add(edge_id)
+    visited_edges = set()
+    
+    for u in graph.users():
+        for v in graph.get_neighbors(u.id):
+            pair = tuple(sorted([str(u.id), str(v)]))
+            if pair not in visited_edges:
+                visited_edges.add(pair)
+                edges.append({"from": u.id, "to": v})
                 
-    return jsonify({"nodes": nodes, "edges": edges})
+    return jsonify({"status": "success", "nodes": nodes, "edges": edges})
 
-@app.route("/api/users", methods=["POST", "PUT", "DELETE"])
+@app.route("/api/stats", methods=["GET"])
+def get_stats():
+    """دریافت آمار کلی شبکه (تعداد کاربران، روابط، و غیره)"""
+    try:
+        stat = Statistics(graph)
+        summary = stat.summary()
+        
+        # تبدیل آیدی‌های اعضای بزرگترین گروه به نام نمایشی
+        group_names = [getattr(graph.get_user(uid), 'name', str(uid)) for uid in summary.get('largest_group_members', [])]
+        summary['largest_group_members'] = group_names
+        
+        # پیدا کردن تمام کاربرانی که بیشترین ارتباط را دارند (پشتیبانی از تساوی)
+        max_degree = -1
+        most_connected = []
+        
+        for uid in graph.user_ids():
+            degree = len(graph.get_neighbors(uid))
+            if degree > max_degree:
+                max_degree = degree
+                most_connected = [uid]
+            elif degree == max_degree and degree > 0:
+                most_connected.append(uid)
+                
+        if max_degree > 0:
+            summary['most_connected_users'] = [
+                {"id": uid, "name": getattr(graph.get_user(uid), 'name', str(uid)), "degree": max_degree} 
+                for uid in most_connected
+            ]
+        else:
+            summary['most_connected_users'] = []
+            
+        return jsonify({"status": "success", "stats": summary})
+    except Exception as e:
+        return jsonify({"status": "error", "message": str(e)})
+
+@app.route("/api/users", methods=["POST", "DELETE"])
 def manage_users():
-    """افزودن، ویرایش و حذف کاربران"""
+    """افزودن و حذف کاربر"""
+    data = request.json
+    uid = parse_id(data.get("id"))
+    
     if request.method == "POST":
-        data = request.json
-        uid = parse_id(data.get("id"))
-        name = data.get("name")
-        
-        user = User(uid)
-        user.name = name
-        
         try:
-            graph.add_user(user)
+            new_user = User(id=uid)
+            new_user.name = data.get("name", str(uid))
+            graph.add_user(new_user)
             save_data()
-            return jsonify({"status": "success", "message": f"کاربر {name} اضافه شد."})
-        except DuplicateUser as e:
+            return jsonify({"status": "success", "message": f"کاربر {new_user.name} ایجاد شد."})
+        except Exception as e:
             return jsonify({"status": "error", "message": str(e)}), 400
             
-    elif request.method == "PUT":
-        data = request.json
-        uid = parse_id(data.get("id"))
-        new_name = data.get("name")
-        try:
-            user = graph.get_user(uid)
-            user.name = new_name
-            save_data()
-            return jsonify({"status": "success", "message": "اطلاعات کاربر بروزرسانی شد."})
-        except UserNotFound as e:
-            return jsonify({"status": "error", "message": str(e)}), 404
-            
     elif request.method == "DELETE":
-        data = request.json
-        uid = parse_id(data.get("id"))
         try:
             graph.remove_user(uid)
             save_data()
             return jsonify({"status": "success", "message": "کاربر حذف شد."})
-        except UserNotFound as e:
-            return jsonify({"status": "error", "message": str(e)}), 404
+        except Exception as e:
+            return jsonify({"status": "error", "message": str(e)}), 400
 
 @app.route("/api/edges", methods=["POST", "DELETE"])
 def manage_edges():
-    """افزودن و حذف دوستی"""
+    """افزودن و حذف دوستی/رابطه"""
     data = request.json
-    u1 = parse_id(data.get("source"))
-    u2 = parse_id(data.get("target"))
+    source = parse_id(data.get("source"))
+    target = parse_id(data.get("target"))
     
     if request.method == "POST":
         try:
-            graph.add_edge(u1, u2)
+            graph.add_edge(source, target)
             save_data()
-            return jsonify({"status": "success", "message": "ارتباط دوستی ایجاد شد."})
-        except (UserNotFound, InvalidEdge, DuplicateEdge) as e:
+            return jsonify({"status": "success", "message": "رابطه با موفقیت ایجاد شد."})
+        except Exception as e:
             return jsonify({"status": "error", "message": str(e)}), 400
             
     elif request.method == "DELETE":
         try:
-            graph.remove_edge(u1, u2)
+            graph.remove_edge(source, target)
             save_data()
-            return jsonify({"status": "success", "message": "ارتباط دوستی حذف شد."})
-        except UserNotFound as e:
-            return jsonify({"status": "error", "message": str(e)}), 404
+            return jsonify({"status": "success", "message": "رابطه با موفقیت قطع شد."})
+        except Exception as e:
+            return jsonify({"status": "error", "message": str(e)}), 400
 
-# --- پردازش‌های خواسته شده ---
-
-@app.route("/api/friends/<uid>", methods=["GET"])
-def get_friends(uid):
-    """1. لیست کردن دوستان یک کاربر"""
-    uid = parse_id(uid)
+@app.route("/api/friends/<user_id>", methods=["GET"])
+def get_friends(user_id):
+    """لیست دوستان یک کاربر خاص"""
     try:
-        friends_ids = graph.get_neighbors(uid)
-        friends = [{"id": fid, "name": getattr(graph.get_user(fid), 'name', str(fid))} for fid in friends_ids]
-        return jsonify({"status": "success", "data": friends})
-    except UserNotFound as e:
-        return jsonify({"status": "error", "message": str(e)}), 404
+        user_id = parse_id(user_id)
+        friends = graph.get_neighbors(user_id)
+        result = [{"id": f, "name": getattr(graph.get_user(f), 'name', str(f))} for f in friends]
+        return jsonify({"status": "success", "data": result})
+    except Exception as e:
+        return jsonify({"status": "error", "message": str(e)}), 400
 
-@app.route("/api/connection/<u1>/<u2>", methods=["GET"])
-def check_connection(u1, u2):
-    """2. آیا دو کاربر با هم مرتبط هستند؟"""
-    u1, u2 = parse_id(u1), parse_id(u2)
+@app.route("/api/recommend/<user_id>", methods=["GET"])
+def recommend_friends(user_id):
+    """پیشنهاد دوست با استفاده از دوستان مشترک"""
     try:
-        connected = graph.has_edge(u1, u2)
-        return jsonify({"status": "success", "connected": connected})
-    except UserNotFound as e:
-        return jsonify({"status": "error", "message": str(e)}), 404
+        user_id = parse_id(user_id)
+        rec = Recommendation(graph)
+        recommendations = rec.recommend(user_id, limit=5)
+        
+        result = [{"id": u.id, "name": getattr(u, 'name', str(u.id)), "score": score} for u, score in recommendations]
+        return jsonify({"status": "success", "recommendations": result})
+    except Exception as e:
+        return jsonify({"status": "error", "message": str(e)}), 400
+
+@app.route("/api/distances/<user_id>", methods=["GET"])
+def get_distances(user_id):
+    """فاصله یک کاربر تا سایر کاربران (تحلیل BFS)"""
+    try:
+        user_id = parse_id(user_id)
+        bfs = BFS(graph)
+        distances_raw = bfs.distance_to_all(user_id)
+        formatted_distances = bfs.format_distances(distances_raw)
+        return jsonify({"status": "success", "distances": formatted_distances})
+    except Exception as e:
+        return jsonify({"status": "error", "message": str(e)}), 400
 
 @app.route("/api/path/<u1>/<u2>", methods=["GET"])
 def get_shortest_path(u1, u2):
-    """3. پیدا کردن کوتاه‌ترین مسیر"""
-    u1, u2 = parse_id(u1), parse_id(u2)
+    """پیدا کردن کوتاه‌ترین مسیر بین دو کاربر"""
     try:
+        u1, u2 = parse_id(u1), parse_id(u2)
         bfs = BFS(graph)
-        path = bfs.shortest_path(u1, u2)
-        formatted = bfs.format_path(path)
+        path_obj = bfs.shortest_path(u1, u2)
+        formatted = bfs.format_path(path_obj)
         return jsonify({"status": "success", "path": formatted})
-    except UserNotFound as e:
-        return jsonify({"status": "error", "message": str(e)}), 404
-
-@app.route("/api/recommend/<uid>", methods=["GET"])
-def recommend_friends(uid):
-    """4. پیشنهاد دوست"""
-    uid = parse_id(uid)
-    try:
-        rec = Recommendation(graph)
-        suggestions = rec.recommend(uid)
-        res = [{"id": u.id, "name": getattr(u, 'name', str(u.id)), "score": s} for u, s in suggestions]
-        return jsonify({"status": "success", "recommendations": res})
-    except UserNotFound as e:
-        return jsonify({"status": "error", "message": str(e)}), 404
-
-@app.route("/api/groups", methods=["GET"])
-def get_groups():
-    """5. لیست کردن گروه‌های شبکه"""
-    dfs = DFS(graph)
-    components = dfs.connected_components()
-    formatted = dfs.format_components(components)
-    return jsonify({"status": "success", "groups": formatted})
+    except Exception as e:
+        return jsonify({"status": "error", "message": str(e)}), 400
 
 @app.route("/api/mutual/<u1>/<u2>", methods=["GET"])
 def get_mutual_friends(u1, u2):
-    """7. دوستان مشترک دو کاربر"""
-    u1, u2 = parse_id(u1), parse_id(u2)
+    """دوستان مشترک بین دو کاربر"""
     try:
-        f1 = graph.get_neighbors(u1)
-        f2 = graph.get_neighbors(u2)
-        mutual_ids = f1.intersection(f2)
-        mutual = [{"id": mid, "name": getattr(graph.get_user(mid), 'name', str(mid))} for mid in mutual_ids]
-        return jsonify({"status": "success", "mutual": mutual})
-    except UserNotFound as e:
-        return jsonify({"status": "error", "message": str(e)}), 404
-
-@app.route("/api/stats", methods=["GET"])
-def get_stats():
-    """8. محاسبه اطلاعات شبکه (شامل 6)"""
-    stats = Statistics(graph)
-    try:
-        summary = stats.summary()
-        # Format the user objects for JSON serialization
-        if summary["most_connected_user"]:
-            u_id = summary["most_connected_user"]["id"]
-            summary["most_connected_user"]["name"] = getattr(graph.get_user(u_id), 'name', str(u_id))
-            
-        summary["largest_group_members"] = [
-            getattr(graph.get_user(uid), 'name', str(uid)) for uid in summary["largest_group_members"]
-        ]
-        return jsonify({"status": "success", "stats": summary})
+        u1, u2 = parse_id(u1), parse_id(u2)
+        n1 = graph.get_neighbors(u1)
+        n2 = graph.get_neighbors(u2)
+        mutual = n1.intersection(n2)
+        
+        result = [{"id": mid, "name": getattr(graph.get_user(mid), 'name', str(mid))} for mid in mutual]
+        return jsonify({"status": "success", "mutual": result})
     except Exception as e:
-        return jsonify({"status": "error", "message": str(e)}), 500
+        return jsonify({"status": "error", "message": str(e)}), 400
 
-@app.route("/api/distances/<uid>", methods=["GET"])
-def get_distances(uid):
-    """9. فاصله کاربر از تمام افراد"""
-    uid = parse_id(uid)
+@app.route("/api/connection/<u1>/<u2>", methods=["GET"])
+def check_connection(u1, u2):
+    """بررسی اینکه آیا دو کاربر مستقیماً دوست هستند یا خیر"""
     try:
-        bfs = BFS(graph)
-        distances = bfs.distance_to_all(uid)
-        formatted = bfs.format_distances(distances)
-        # مرتب‌سازی از کمترین فاصله به بیشترین
-        sorted_dist = dict(sorted(formatted.items(), key=lambda item: item[1]))
-        return jsonify({"status": "success", "distances": sorted_dist})
-    except UserNotFound as e:
-        return jsonify({"status": "error", "message": str(e)}), 404
+        u1, u2 = parse_id(u1), parse_id(u2)
+        connected = graph.has_edge(u1, u2)
+        return jsonify({"status": "success", "connected": connected})
+    except Exception as e:
+        return jsonify({"status": "error", "message": str(e)}), 400
+
+@app.route("/api/groups", methods=["GET"])
+def get_network_groups():
+    """لیست کردن تمام کلاسترها و گروه‌های دوستی (تحلیل DFS)"""
+    try:
+        dfs = DFS(graph)
+        components = dfs.connected_components()
+        formatted = dfs.format_components(components)
+        return jsonify({"status": "success", "groups": formatted})
+    except Exception as e:
+        return jsonify({"status": "error", "message": str(e)}), 400
 
 @app.route("/api/upload", methods=["POST"])
 def upload_dataset():
-    """ایمپورت گروهی کاربران و روابط از فایل txt با تخصیص خودکار آیدی عددی"""
+    """آپلود دیتاست و اختصاص خودکار آیدی عددی به اسامی متنی"""
     if 'file' not in request.files:
         return jsonify({"status": "error", "message": "فایلی ارسال نشده است."}), 400
         
@@ -284,79 +269,66 @@ def upload_dataset():
         return jsonify({"status": "error", "message": "فایلی انتخاب نشده است."}), 400
         
     try:
-        content = file.read().decode('utf-8')
-        lines = content.splitlines()
+        content = file.read().decode('utf-8').splitlines()
         
-        users_added = 0
-        edges_added = 0
-        
-        # پیدا کردن بزرگترین آیدی عددی موجود در گراف برای اینکه از ادامه اون شروع کنیم (مثلا از ۱)
-        existing_ids = []
-        for uid in graph.user_ids():
+        # پیدا کردن بزرگترین آیدی فعلی در گراف برای شروع شماره گذاری جدید
+        current_max_id = 0
+        for user_id in graph.user_ids():
             try:
-                existing_ids.append(int(uid))
+                num = int(user_id)
+                if num > current_max_id:
+                    current_max_id = num
             except ValueError:
                 pass
                 
-        next_id = max(existing_ids + [0]) + 1
+        name_to_id = {}
+        added_users = 0
+        added_edges = 0
         
-        # دیکشنری برای نگهداری مپینگ حروف/کلمات به آیدی‌های عددی جدید
-        token_to_id = {} 
-        
-        for line in lines:
-            line = line.strip()
-            # رد کردن خطوط خالی یا کامنت‌ها
-            if not line or line.startswith('#'):
+        for line in content:
+            parts = line.strip().split()
+            if not parts:
                 continue
                 
-            parts = line.split()
-            if len(parts) >= 1:
-                token1 = parts[0]
+            # ساخت کاربران
+            for part in parts:
+                if part not in name_to_id:
+                    current_max_id += 1
+                    name_to_id[part] = current_max_id
+                    
+                    new_user = User(id=current_max_id)
+                    new_user.name = part
+                    graph.add_user(new_user)
+                    added_users += 1
+                    
+            # ساخت رابطه
+            if len(parts) >= 2:
+                id1 = name_to_id[parts[0]]
+                id2 = name_to_id[parts[1]]
                 
-                # اگر این کاراکتر/اسم رو قبلا ندیدیم، یک آیدی عددی بهش میدیم
-                if token1 not in token_to_id:
-                    token_to_id[token1] = next_id
-                    user = User(id=next_id)
-                    user.name = token1  # اسم کاربر رو همون چیزی میذاریم که تو فایله
+                if not graph.has_edge(id1, id2):
+                    graph.add_edge(id1, id2)
+                    added_edges += 1
                     
-                    if not graph.has_user(next_id):
-                        graph.add_user(user)
-                        users_added += 1
-                    next_id += 1
-                    
-                u1 = token_to_id[token1]
-                
-                if len(parts) >= 2:
-                    token2 = parts[1]
-                    
-                    if token2 not in token_to_id:
-                        token_to_id[token2] = next_id
-                        user = User(id=next_id)
-                        user.name = token2
-                        
-                        if not graph.has_user(next_id):
-                            graph.add_user(user)
-                            users_added += 1
-                        next_id += 1
-                        
-                    u2 = token_to_id[token2]
-                    
-                    try:
-                        # جلوگیری از ایجاد دوستی کاربر با خودش
-                        if u1 != u2:
-                            graph.add_edge(u1, u2)
-                            edges_added += 1
-                    except (DuplicateEdge, InvalidEdge):
-                        pass
-                        
         save_data()
         return jsonify({
             "status": "success", 
-            "message": f"دیتاست با موفقیت اعمال شد. {users_added} کاربر با آیدی عددی یکتا و {edges_added} رابطه جدید ساخته شد."
+            "message": f"پردازش موفق: {added_users} کاربر جدید و {added_edges} رابطه به گراف اضافه شد."
         })
+        
     except Exception as e:
         return jsonify({"status": "error", "message": f"خطا در پردازش فایل: {str(e)}"}), 500
 
+@app.route("/api/reset", methods=["POST"])
+def reset_graph():
+    """پاکسازی کامل گراف و دیتابیس"""
+    try:
+        graph.clear()
+        save_data()
+        return jsonify({"status": "success", "message": "دیتابیس شبکه با موفقیت پاکسازی شد."})
+    except Exception as e:
+        return jsonify({"status": "error", "message": str(e)}), 500
+
 if __name__ == "__main__":
-    # اجرای سرور روی پورت 5000
-    app.run(debug=True, port=5000)
+    load_data()  # بارگذاری دیتا در هنگام شروع سرور
+    app.run(debug=True)

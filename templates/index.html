@@ -45,6 +45,7 @@
             }
         }
     </script>
+    
     <style>
         body { background-color: #05080f; color: #cbd5e1; }
         
@@ -72,6 +73,7 @@
             background: rgba(14, 165, 233, 0.05);
         }
 
+        /* حذف بک‌گراند شطرنجی و تمیز کردن گراف */
         #network-container { 
             outline: none; 
             background-color: transparent;
@@ -86,53 +88,51 @@
     <!-- Top Section (3 Columns: User Details, Graph, Stats) -->
     <div class="flex-1 flex flex-row gap-4 min-h-0">
         
-        <!-- LEFT PANEL: User Details -->
+        <!-- LEFT PANEL: User Details Only -->
         <div class="w-72 glass-panel rounded-2xl flex flex-col overflow-hidden shrink-0">
-            <div class="p-4 border-b border-dark-border bg-dark-panel flex items-center gap-2 shadow-sm">
+            <div class="p-4 border-b border-dark-border bg-dark-panel flex items-center gap-2 shadow-sm shrink-0">
                 <i class="ph ph-identification-card text-xl text-brand-blue"></i>
                 <h2 class="font-bold text-white text-sm">اطلاعات کاربر</h2>
             </div>
             
-            <div class="p-4 flex-1 overflow-y-auto">
+            <div class="p-4 flex-1 overflow-y-auto custom-scrollbar">
                 <!-- No Selection State -->
-                <div id="no-node-selected" class="h-full flex flex-col items-center justify-center text-center opacity-40">
-                    <i class="ph ph-hand-tap text-5xl mb-3 text-brand-blue opacity-50 drop-shadow-[0_0_15px_rgba(14,165,233,0.5)]"></i>
+                <div id="no-node-selected" class="h-full flex flex-col items-center justify-center text-center opacity-40 py-4">
+                    <i class="ph ph-hand-tap text-4xl mb-3 text-brand-blue opacity-50 drop-shadow-[0_0_15px_rgba(14,165,233,0.5)]"></i>
                     <p class="text-xs text-gray-400">یک نود را در گراف انتخاب کنید</p>
                 </div>
 
                 <!-- Selected State -->
-                <div id="node-details" class="hidden flex-col gap-5">
-                    <div class="flex items-center gap-4 bg-dark-bg p-3 rounded-xl border border-dark-border shadow-inner">
-                        <div class="w-12 h-12 rounded-full bg-brand-blue/10 flex items-center justify-center border border-brand-blue/40 text-brand-blue shadow-[0_0_15px_rgba(14,165,233,0.3)]">
-                            <i class="ph ph-user text-2xl"></i>
+                <div id="node-details" class="hidden flex-col gap-4">
+                    <div class="flex items-center gap-3 bg-dark-bg p-3 rounded-xl border border-dark-border shadow-inner">
+                        <div class="w-10 h-10 rounded-full bg-brand-blue/10 flex items-center justify-center border border-brand-blue/40 text-brand-blue shadow-[0_0_15px_rgba(14,165,233,0.3)] shrink-0">
+                            <i class="ph ph-user text-xl"></i>
                         </div>
-                        <div>
+                        <div class="overflow-hidden">
                             <div class="text-[10px] text-gray-500 mb-0.5">ID: <span id="sel-node-id" class="text-gray-300 font-mono"></span></div>
-                            <div id="sel-node-name" class="font-bold text-white text-base truncate w-36"></div>
+                            <div id="sel-node-name" class="font-bold text-white text-sm truncate"></div>
                         </div>
                     </div>
 
                     <div class="flex flex-col gap-2">
-                        <p class="text-[11px] text-gray-500 font-bold mb-1 px-1">عملیات‌های پردازشی</p>
-                        
-                        <button onclick="actionGetFriends()" class="flex items-center gap-3 w-full p-3 rounded-xl bg-dark-bg hover:bg-dark-panelHover border border-dark-border hover:border-brand-blue/60 text-xs text-gray-300 transition text-right group">
+                        <button onclick="actionGetFriends()" class="flex items-center gap-3 w-full p-2.5 rounded-xl bg-dark-bg hover:bg-dark-panelHover border border-dark-border hover:border-brand-blue/60 text-xs text-gray-300 transition text-right group">
                             <i class="ph ph-users text-brand-blue text-lg group-hover:drop-shadow-[0_0_8px_rgba(14,165,233,0.8)]"></i>
-                            <span>نمایش لیست دوستان</span>
+                            <span>نمایش دوستان</span>
                         </button>
                         
-                        <button onclick="actionRecommend()" class="flex items-center gap-3 w-full p-3 rounded-xl bg-dark-bg hover:bg-dark-panelHover border border-dark-border hover:border-brand-purple/60 text-xs text-gray-300 transition text-right group">
+                        <button onclick="actionRecommend()" class="flex items-center gap-3 w-full p-2.5 rounded-xl bg-dark-bg hover:bg-dark-panelHover border border-dark-border hover:border-brand-purple/60 text-xs text-gray-300 transition text-right group">
                             <i class="ph ph-magic-wand text-brand-purple text-lg group-hover:drop-shadow-[0_0_8px_rgba(139,92,246,0.8)]"></i>
-                            <span>پیشنهاد دوست</span>
+                            <span>پیشنهاد هوشمند</span>
                         </button>
 
-                        <button onclick="actionDistances()" class="flex items-center gap-3 w-full p-3 rounded-xl bg-dark-bg hover:bg-dark-panelHover border border-dark-border hover:border-brand-neon/60 text-xs text-gray-300 transition text-right group">
+                        <button onclick="actionDistances()" class="flex items-center gap-3 w-full p-2.5 rounded-xl bg-dark-bg hover:bg-dark-panelHover border border-dark-border hover:border-brand-neon/60 text-xs text-gray-300 transition text-right group">
                             <i class="ph ph-arrows-out-line-horizontal text-brand-neon text-lg group-hover:drop-shadow-[0_0_8px_rgba(6,182,212,0.8)]"></i>
-                            <span>فاصله تا تمام شبکه</span>
+                            <span>فاصله تا بقیه</span>
                         </button>
                         
-                        <div class="h-px w-full bg-dark-border my-2"></div>
+                        <div class="h-px w-full bg-dark-border my-1"></div>
                         
-                        <button onclick="deleteUserFromPanel()" class="flex items-center justify-center gap-2 w-full p-3 rounded-xl bg-red-500/5 hover:bg-red-500/15 border border-red-500/20 hover:border-red-500/40 text-xs text-red-400 transition font-bold group">
+                        <button onclick="deleteUserFromPanel()" class="flex items-center justify-center gap-2 w-full p-2.5 rounded-xl bg-red-500/5 hover:bg-red-500/15 border border-red-500/20 hover:border-red-500/40 text-xs text-red-400 transition font-bold group">
                             <i class="ph ph-trash text-lg group-hover:drop-shadow-[0_0_8px_rgba(239,68,68,0.8)]"></i>
                             <span>حذف کاربر</span>
                         </button>
@@ -144,34 +144,37 @@
         <!-- CENTER PANEL: Graph Workspace -->
         <div class="flex-1 glass-panel rounded-2xl relative flex flex-col overflow-hidden shadow-[0_0_50px_rgba(0,0,0,0.6)] border-gray-800">
             
-            <!-- Floating Tools (Top Left of Graph) -->
-            <div class="absolute top-4 left-4 z-10 flex gap-3">
-                <button onclick="openModal('userModal')" class="bg-[#0b1019]/80 backdrop-blur-md border border-gray-700 hover:border-brand-blue text-gray-300 hover:text-white px-4 py-2.5 rounded-xl text-xs font-bold flex items-center gap-2 transition shadow-lg hover:shadow-[0_0_15px_rgba(14,165,233,0.3)]">
+            <!-- Floating Tools (Inside Graph, Left Side, Vertical Stack) -->
+            <!-- تغییر به w-max برای فیت شدن عرض با محتوا -->
+            <div class="absolute top-4 left-4 z-10 flex flex-col gap-2.5 w-max">
+                <button onclick="openModal('userModal')" class="bg-[#0b1019]/85 backdrop-blur-md border border-gray-700 hover:border-brand-blue text-gray-300 hover:text-white px-4 py-2.5 rounded-xl text-[11px] font-bold flex items-center gap-3 transition shadow-lg hover:shadow-[0_0_15px_rgba(14,165,233,0.3)] w-full">
                     <i class="ph ph-user-plus text-brand-blue text-lg"></i> افزودن کاربر
                 </button>
-                <button onclick="openModal('edgeModal')" class="bg-[#0b1019]/80 backdrop-blur-md border border-gray-700 hover:border-brand-purple text-gray-300 hover:text-white px-4 py-2.5 rounded-xl text-xs font-bold flex items-center gap-2 transition shadow-lg hover:shadow-[0_0_15px_rgba(139,92,246,0.3)]">
+                <button onclick="openModal('edgeModal')" class="bg-[#0b1019]/85 backdrop-blur-md border border-gray-700 hover:border-brand-purple text-gray-300 hover:text-white px-4 py-2.5 rounded-xl text-[11px] font-bold flex items-center gap-3 transition shadow-lg hover:shadow-[0_0_15px_rgba(139,92,246,0.3)] w-full">
                     <i class="ph ph-link text-brand-purple text-lg"></i> ایجاد رابطه
                 </button>
-                <button onclick="getGroups()" class="bg-[#0b1019]/80 backdrop-blur-md border border-gray-700 hover:border-brand-neon text-gray-300 hover:text-white px-4 py-2.5 rounded-xl text-xs font-bold flex items-center gap-2 transition shadow-lg hover:shadow-[0_0_15px_rgba(6,182,212,0.3)]">
+                <button onclick="getGroups()" class="bg-[#0b1019]/85 backdrop-blur-md border border-gray-700 hover:border-brand-neon text-gray-300 hover:text-white px-4 py-2.5 rounded-xl text-[11px] font-bold flex items-center gap-3 transition shadow-lg hover:shadow-[0_0_15px_rgba(6,182,212,0.3)] w-full">
                     <i class="ph ph-users-three text-brand-neon text-lg"></i> گروه‌های شبکه
                 </button>
-                
-                <!-- دکمه آپلود دیتاست اضافه شد -->
-                <button onclick="document.getElementById('dataset-upload').click()" class="bg-[#0b1019]/80 backdrop-blur-md border border-gray-700 hover:border-brand-green text-gray-300 hover:text-white px-4 py-2.5 rounded-xl text-xs font-bold flex items-center gap-2 transition shadow-lg hover:shadow-[0_0_15px_rgba(34,197,94,0.3)]">
+                <button onclick="document.getElementById('dataset-upload').click()" class="bg-[#0b1019]/85 backdrop-blur-md border border-gray-700 hover:border-brand-green text-gray-300 hover:text-white px-4 py-2.5 rounded-xl text-[11px] font-bold flex items-center gap-3 transition shadow-lg hover:shadow-[0_0_15px_rgba(34,197,94,0.3)] w-full">
                     <i class="ph ph-upload-simple text-brand-green text-lg"></i> ایمپورت Dataset
                 </button>
                 <input type="file" id="dataset-upload" accept=".txt" class="hidden" onchange="handleDatasetUpload(event)">
+                
+                <button onclick="resetGraphConfirm()" class="bg-[#0b1019]/85 backdrop-blur-md border border-gray-700 hover:border-brand-red text-red-400 hover:text-white px-4 py-2.5 rounded-xl text-[11px] font-bold flex items-center gap-3 transition shadow-lg hover:shadow-[0_0_15px_rgba(239,68,68,0.3)] w-full mt-2">
+                    <i class="ph ph-arrows-clockwise text-brand-red text-lg"></i> پاکسازی شبکه
+                </button>
             </div>
 
             <!-- Graph Canvas -->
             <div id="network-container" class="flex-1 w-full h-full cursor-grab active:cursor-grabbing"></div>
         </div>
 
-        <!-- RIGHT PANEL: Network Stats (Compact & No Scroll) -->
-        <div class="w-72 flex flex-col justify-between shrink-0 h-full pb-0.5">
+        <!-- RIGHT PANEL: Network Stats (Scrollable) -->
+        <div class="w-72 flex flex-col gap-3 shrink-0 h-full overflow-y-auto custom-scrollbar pr-2 pb-2">
             
             <!-- Card 1: Total Users -->
-            <div class="bg-[#0b1019] border border-gray-800/80 border-t-2 border-t-blue-500 rounded-xl p-4 flex justify-between items-center shadow-[0_8px_20px_rgba(0,0,0,0.5)]">
+            <div class="bg-[#0b1019] border border-gray-800/80 border-t-2 border-t-blue-500 rounded-xl p-4 flex justify-between items-center shadow-[0_8px_20px_rgba(0,0,0,0.5)] shrink-0">
                 <div class="text-right flex-1">
                     <h3 class="text-gray-400 text-xs font-bold">کل کاربران</h3>
                     <p id="stat-total-users" class="text-xl font-black text-white mt-1 font-mono">--</p>
@@ -182,7 +185,7 @@
             </div>
 
             <!-- Card 2: Total Edges -->
-            <div class="bg-[#0b1019] border border-gray-800/80 border-t-2 border-t-purple-500 rounded-xl p-4 flex justify-between items-center shadow-[0_8px_20px_rgba(0,0,0,0.5)] mt-3">
+            <div class="bg-[#0b1019] border border-gray-800/80 border-t-2 border-t-purple-500 rounded-xl p-4 flex justify-between items-center shadow-[0_8px_20px_rgba(0,0,0,0.5)] shrink-0">
                 <div class="text-right flex-1">
                     <h3 class="text-gray-400 text-xs font-bold">کل روابط</h3>
                     <p id="stat-total-edges" class="text-xl font-black text-white mt-1 font-mono">--</p>
@@ -192,8 +195,19 @@
                 </div>
             </div>
 
-            <!-- Card 3: Largest Group -->
-            <div class="bg-[#0b1019] border border-gray-800/80 border-t-2 border-t-orange-500 rounded-xl p-4 flex justify-between items-center shadow-[0_8px_20px_rgba(0,0,0,0.5)] mt-3">
+            <!-- Card 3: Average Relationships -->
+            <div class="bg-[#0b1019] border border-gray-800/80 border-t-2 border-t-yellow-500 rounded-xl p-4 flex justify-between items-center shadow-[0_8px_20px_rgba(0,0,0,0.5)] shrink-0">
+                <div class="text-right flex-1">
+                    <h3 class="text-gray-400 text-xs font-bold">میانگین روابط</h3>
+                    <p id="stat-avg-friends" class="text-xl font-black text-white mt-1 font-mono">--</p>
+                </div>
+                <div class="text-yellow-500 bg-yellow-500/10 p-2.5 rounded-lg shrink-0">
+                    <i class="ph ph-chart-line-up text-2xl drop-shadow-[0_0_8px_rgba(234,179,8,0.5)]"></i>
+                </div>
+            </div>
+
+            <!-- Card 4: Largest Group -->
+            <div class="bg-[#0b1019] border border-gray-800/80 border-t-2 border-t-orange-500 rounded-xl p-4 flex justify-between items-center shadow-[0_8px_20px_rgba(0,0,0,0.5)] shrink-0">
                 <div class="text-right flex-1">
                     <h3 class="text-gray-400 text-xs font-bold">بزرگترین گروه</h3>
                     <p id="stat-largest-group" class="text-xl font-black text-white mt-1 font-mono">--</p>
@@ -203,8 +217,8 @@
                 </div>
             </div>
 
-            <!-- Card 4: Most Connected -->
-            <div class="bg-[#0b1019] border border-gray-800/80 border-t-2 border-t-green-500 rounded-xl p-4 flex justify-between items-center shadow-[0_8px_20px_rgba(0,0,0,0.5)] mt-3">
+            <!-- Card 5: Most Connected -->
+            <div class="bg-[#0b1019] border border-gray-800/80 border-t-2 border-t-green-500 rounded-xl p-4 flex justify-between items-center shadow-[0_8px_20px_rgba(0,0,0,0.5)] shrink-0">
                 <div class="text-right flex-1 overflow-hidden">
                     <h3 class="text-gray-400 text-xs font-bold">بیشترین ارتباط</h3>
                     <p id="stat-most-connected" class="text-lg font-black text-white mt-1 truncate">--</p>
@@ -225,7 +239,7 @@
         <!-- Tabs Header -->
         <div class="flex overflow-x-auto border-b border-dark-border bg-[#0b1019]">
             <button onclick="switchTab('tab-console')" id="btn-tab-console" class="tab-btn tab-active px-6 py-4 text-xs font-bold flex items-center gap-2 whitespace-nowrap">
-                <i class="ph ph-terminal-window text-lg"></i> Terminal
+                <i class="ph ph-terminal-window text-lg"></i> ترمینال عملیات
             </button>
             <button onclick="switchTab('tab-path')" id="btn-tab-path" class="tab-btn px-6 py-4 text-xs font-bold flex items-center gap-2 whitespace-nowrap">
                 <i class="ph ph-git-merge text-lg"></i> کوتاه‌ترین مسیر (BFS)
@@ -236,6 +250,17 @@
             <button onclick="switchTab('tab-check')" id="btn-tab-check" class="tab-btn px-6 py-4 text-xs font-bold flex items-center gap-2 whitespace-nowrap">
                 <i class="ph ph-plugs-connected text-lg"></i> بررسی ارتباط مستقیم
             </button>
+            
+            <!-- تب‌های پویا (مخصوص عملیات‌های کاربر) -->
+            <button onclick="switchTab('tab-friends')" id="btn-tab-friends" class="tab-btn px-6 py-4 text-xs font-bold flex items-center gap-2 whitespace-nowrap hidden transition-all duration-300">
+                <i class="ph ph-user-list text-lg text-brand-blue"></i> دوستان مستقیم
+            </button>
+            <button onclick="switchTab('tab-recommend')" id="btn-tab-recommend" class="tab-btn px-6 py-4 text-xs font-bold flex items-center gap-2 whitespace-nowrap hidden transition-all duration-300">
+                <i class="ph ph-magic-wand text-lg text-brand-purple"></i> پیشنهادات سیستم
+            </button>
+            <button onclick="switchTab('tab-distances')" id="btn-tab-distances" class="tab-btn px-6 py-4 text-xs font-bold flex items-center gap-2 whitespace-nowrap hidden transition-all duration-300">
+                <i class="ph ph-arrows-out-line-horizontal text-lg text-brand-neon"></i> فواصل از کاربر
+            </button>
         </div>
 
         <!-- Tabs Content -->
@@ -244,7 +269,7 @@
             <!-- Tab: Console -->
             <div id="tab-console" class="tab-content h-full flex flex-col font-mono text-xs overflow-y-auto custom-scrollbar">
                 <div id="consoleOutput" class="flex-1 whitespace-pre-wrap flex flex-col gap-2 pb-2">
-                    <div class="text-brand-green font-bold flex items-center gap-2"><i class="ph ph-check-circle"></i> Ready... </div>
+                    <div class="text-brand-green font-bold flex items-center gap-2"><i class="ph ph-check-circle"></i> موتور پردازش گراف آماده به کار است...</div>
                 </div>
             </div>
 
@@ -284,6 +309,21 @@
                 <div id="check-result" class="mt-2 p-4 bg-dark-bg border border-brand-neon/20 rounded-xl hidden flex-1 overflow-y-auto text-sm"></div>
             </div>
 
+            <!-- Tab: Friends List Result -->
+            <div id="tab-friends" class="tab-content hidden h-full flex flex-col">
+                <div id="friends-result" class="p-5 bg-dark-bg border border-brand-blue/20 rounded-xl h-full overflow-y-auto flex-1 shadow-inner"></div>
+            </div>
+
+            <!-- Tab: Recommendations Result -->
+            <div id="tab-recommend" class="tab-content hidden h-full flex flex-col">
+                <div id="recommend-result" class="p-5 bg-dark-bg border border-brand-purple/20 rounded-xl h-full overflow-y-auto flex-1 shadow-inner"></div>
+            </div>
+
+            <!-- Tab: Distances Result -->
+            <div id="tab-distances" class="tab-content hidden h-full flex flex-col">
+                <div id="distances-result" class="p-5 bg-dark-bg border border-brand-neon/20 rounded-xl h-full overflow-y-auto flex-1 custom-scrollbar shadow-inner"></div>
+            </div>
+
         </div>
     </div>
 
@@ -293,7 +333,7 @@
             <h2 class="text-lg font-bold text-white mb-6 flex items-center gap-2"><i class="ph ph-user-plus text-brand-blue text-2xl drop-shadow-[0_0_8px_rgba(14,165,233,0.8)]"></i> افزودن کاربر جدید</h2>
             <div class="space-y-4">
                 <div>
-                    <label class="block text-[11px] text-gray-400 mb-1.5 font-bold">آیدی</label>
+                    <label class="block text-[11px] text-gray-400 mb-1.5 font-bold">آیدی (یکتا)</label>
                     <input type="text" id="modal-userId" class="w-full bg-dark-bg border border-gray-800 rounded-xl px-4 py-3 text-white focus:border-brand-blue outline-none font-mono text-sm transition" placeholder="مثال: 12">
                 </div>
                 <div>
@@ -343,6 +383,18 @@
                 <button onclick="closeModal('groupsModal')" class="text-gray-500 hover:text-white transition bg-dark-bg p-2 rounded-lg border border-gray-800 hover:border-gray-600"><i class="ph ph-x text-lg"></i></button>
             </div>
             <div id="groups-container" class="flex-1 overflow-y-auto pr-2 space-y-4 pb-2 custom-scrollbar"></div>
+        </div>
+    </div>
+    
+    <!-- Confirm Reset Modal -->
+    <div id="confirmResetModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex items-center justify-center">
+        <div class="bg-[#0b1019] border border-gray-800 rounded-2xl w-full max-w-md p-6 shadow-[0_0_50px_rgba(239,68,68,0.15)] transform scale-95 transition-transform" id="confirmResetModalContent">
+            <h2 class="text-lg font-bold text-white mb-4 flex items-center gap-2"><i class="ph ph-warning-circle text-brand-red text-2xl drop-shadow-[0_0_8px_rgba(239,68,68,0.8)]"></i> هشدار پاکسازی کامل شبکه</h2>
+            <p class="text-gray-300 text-sm mb-8 leading-relaxed">آیا مطمئن هستید که می‌خواهید تمام داده‌های شبکه شامل کاربران و روابط را به طور کامل پاک کنید؟ این عملیات غیرقابل بازگشت است.</p>
+            <div class="flex gap-3">
+                <button onclick="closeModal('confirmResetModal')" class="flex-1 py-3 rounded-xl bg-dark-bg border border-gray-800 text-gray-400 hover:text-white hover:border-gray-600 transition text-sm font-bold">انصراف</button>
+                <button onclick="executeResetGraph()" class="flex-1 py-3 rounded-xl bg-brand-red text-white hover:bg-red-500 transition text-sm font-bold shadow-[0_0_15px_rgba(239,68,68,0.4)]">بله، همه چیز را پاک کن</button>
+            </div>
         </div>
     </div>
 
@@ -425,15 +477,30 @@
                 document.getElementById('stat-total-users').innerText = res.stats.total_users;
                 document.getElementById('stat-total-edges').innerText = res.stats.total_relationships;
                 
+                // محاسبه ایمن میانگین روابط در صورت عدم بازگشت از بک‌اند
+                let avg = 0;
+                if (res.stats.average_friends !== undefined) {
+                    avg = res.stats.average_friends;
+                } else if (res.stats.total_users > 0) {
+                    avg = (res.stats.total_relationships * 2) / res.stats.total_users;
+                }
+                document.getElementById('stat-avg-friends').innerText = avg.toFixed(1);
+
                 const lgs = res.stats.largest_group_size;
                 document.getElementById('stat-largest-group').innerText = lgs;
 
-                const mc = res.stats.most_connected_user;
-                if(mc) {
-                    document.getElementById('stat-most-connected').innerText = mc.name;
-                    document.getElementById('stat-most-connected-count').innerText = mc.degree + ' دوست';
+                // مدیریت نمایش چندین کاربر با رکورد مساوی
+                const mcUsers = res.stats.most_connected_users;
+                const elConnected = document.getElementById('stat-most-connected');
+                
+                if(mcUsers && mcUsers.length > 0) {
+                    const names = mcUsers.map(u => u.name).join(' ، ');
+                    elConnected.innerText = names;
+                    elConnected.title = names; // نمایش لیست کامل موقع هاور شدن (اگر اسم‌ها طولانی بود)
+                    document.getElementById('stat-most-connected-count').innerText = mcUsers[0].degree + ' دوست';
                 } else {
-                    document.getElementById('stat-most-connected').innerText = '--';
+                    elConnected.innerText = '--';
+                    elConnected.title = '';
                     document.getElementById('stat-most-connected-count').innerText = '-- دوست';
                 }
             }
@@ -533,6 +600,11 @@
                         emptyPanel.classList.remove('hidden');
                         detailsPanel.classList.add('hidden');
                         detailsPanel.classList.remove('flex');
+                        
+                        // Hide dynamic tabs if a node is unselected
+                        document.getElementById('btn-tab-friends').classList.add('hidden');
+                        document.getElementById('btn-tab-recommend').classList.add('hidden');
+                        document.getElementById('btn-tab-distances').classList.add('hidden');
                     }
                 });
             } catch (err) {
@@ -543,31 +615,95 @@
         async function actionGetFriends() {
             if(!selectedNodeId) return;
             const res = await fetchAPI(`/api/friends/${selectedNodeId}`);
+            
+            document.getElementById('btn-tab-friends').classList.remove('hidden');
+            switchTab('tab-friends');
+            const resultDiv = document.getElementById('friends-result');
+
             if(res) {
-                const names = res.data.map(u => u.name).join(' ، ');
-                log(`لیست دوستان [ ${selectedNodeName} ] :`, 'title');
-                log(names || 'این کاربر هنوز دوستی ندارد.');
+                if(res.data.length > 0) {
+                    const tags = res.data.map(u => `<span class="bg-dark-panel text-brand-blue border border-brand-blue/50 px-5 py-2.5 rounded-xl text-sm font-bold flex items-center gap-2 shadow-[0_0_15px_rgba(14,165,233,0.3)] hover:scale-105 transition-transform"><i class="ph ph-user text-xl"></i> ${u.name}</span>`).join('');
+                    resultDiv.innerHTML = `
+                        <div class="text-sm text-brand-blue mb-5 font-bold flex items-center gap-2 drop-shadow-[0_0_5px_rgba(14,165,233,0.8)]"><i class="ph ph-users text-2xl"></i> دوستان مستقیم [ ${selectedNodeName} ]: <span class="text-white text-xl ml-1 font-mono">${res.data.length} نفر</span></div>
+                        <div class="flex flex-wrap gap-3">${tags}</div>
+                    `;
+                } else {
+                    resultDiv.innerHTML = `
+                        <div class="flex h-full w-full items-center justify-center gap-4 text-gray-400 opacity-60">
+                            <i class="ph ph-info text-4xl"></i><span class="text-lg font-bold">این کاربر هنوز دوستی در شبکه ندارد.</span>
+                        </div>
+                    `;
+                }
             }
         }
 
         async function actionRecommend() {
             if(!selectedNodeId) return;
             const res = await fetchAPI(`/api/recommend/${selectedNodeId}`);
+            
+            document.getElementById('btn-tab-recommend').classList.remove('hidden');
+            switchTab('tab-recommend');
+            const resultDiv = document.getElementById('recommend-result');
+
             if(res) {
-                log(`پیشنهاد سیستم برای [ ${selectedNodeName} ] :`, 'title');
-                if(res.recommendations.length === 0) log("شخص مناسبی برای پیشنهاد یافت نشد.");
-                res.recommendations.forEach(r => log(`سیستم کاربر '${r.name}' را با امتیاز شباهت ${r.score} پیشنهاد می‌دهد.`));
+                if(res.recommendations.length > 0) {
+                    const tags = res.recommendations.map(r => `
+                        <div class="bg-dark-panel text-brand-purple border border-brand-purple/50 px-5 py-3 rounded-xl text-sm font-bold flex items-center justify-between gap-4 shadow-[0_0_15px_rgba(139,92,246,0.3)] w-64 hover:border-brand-purple transition-colors">
+                            <span class="flex items-center gap-2 text-white"><i class="ph ph-user-plus text-brand-purple text-xl"></i> ${r.name}</span>
+                            <span class="bg-brand-purple/20 text-brand-purple px-2 py-1 rounded-md text-xs font-mono">امتیاز: ${r.score}</span>
+                        </div>
+                    `).join('');
+                    resultDiv.innerHTML = `
+                        <div class="text-sm text-brand-purple mb-5 font-bold flex items-center gap-2 drop-shadow-[0_0_5px_rgba(139,92,246,0.8)]"><i class="ph ph-magic-wand text-2xl"></i> پیشنهادهای سیستم برای [ ${selectedNodeName} ]: </div>
+                        <div class="flex flex-wrap gap-4">${tags}</div>
+                    `;
+                } else {
+                    resultDiv.innerHTML = `
+                        <div class="flex h-full w-full items-center justify-center gap-4 text-gray-400 opacity-60">
+                            <i class="ph ph-warning-circle text-4xl"></i><span class="text-lg font-bold">شخص مناسبی برای پیشنهاد یافت نشد.</span>
+                        </div>
+                    `;
+                }
             }
         }
 
         async function actionDistances() {
             if(!selectedNodeId) return;
             const res = await fetchAPI(`/api/distances/${selectedNodeId}`);
+            
+            document.getElementById('btn-tab-distances').classList.remove('hidden');
+            switchTab('tab-distances');
+            const resultDiv = document.getElementById('distances-result');
+
             if(res) {
-                log(`تحلیل فواصل از [ ${selectedNodeName} ] :`, 'title');
+                const grouped = {};
                 for (const [name, dist] of Object.entries(res.distances)) {
-                    log(`${name} ⟵ در فاصله ${dist} قدمی قرار دارد`);
+                    if(!grouped[dist]) grouped[dist] = [];
+                    grouped[dist].push(name);
                 }
+                
+                let html = `<div class="text-sm text-brand-neon mb-5 font-bold flex items-center gap-2 drop-shadow-[0_0_5px_rgba(6,182,212,0.8)]"><i class="ph ph-arrows-out-line-horizontal text-2xl"></i> فاصله کاربران تا [ ${selectedNodeName} ]: </div><div class="flex flex-col gap-4 pb-4">`;
+                
+                const sortedDistances = Object.keys(grouped).sort((a,b) => a-b);
+                if (sortedDistances.length === 0) {
+                     html += `
+                        <div class="flex h-full w-full items-center justify-center gap-4 text-gray-400 opacity-60 pt-10">
+                            <i class="ph ph-info text-4xl"></i><span class="text-lg font-bold">این کاربر با هیچ شخص دیگری در شبکه در ارتباط نیست.</span>
+                        </div>
+                    `;
+                } else {
+                    for(const dist of sortedDistances) {
+                        const membersHtml = grouped[dist].map(m => `<span class="bg-dark-panel border border-brand-neon/30 text-brand-neon px-4 py-2 rounded-lg text-sm font-bold shadow-[0_0_10px_rgba(6,182,212,0.2)]"><i class="ph ph-user inline-block align-text-bottom mr-1"></i>${m}</span>`).join('');
+                        html += `
+                            <div class="flex flex-col md:flex-row gap-4 items-start md:items-center bg-brand-neon/5 p-4 rounded-xl border border-brand-neon/20">
+                                <div class="shrink-0 bg-brand-neon/20 text-brand-neon font-bold text-sm px-4 py-2 rounded-lg text-center w-full md:w-auto shadow-[0_0_10px_rgba(6,182,212,0.1)]">فاصله ${dist}</div>
+                                <div class="flex flex-wrap gap-2">${membersHtml}</div>
+                            </div>
+                        `;
+                    }
+                }
+                html += `</div>`;
+                resultDiv.innerHTML = html;
             }
         }
 
@@ -591,6 +727,12 @@
                 loadGraph();
                 document.getElementById('no-node-selected').classList.remove('hidden');
                 document.getElementById('node-details').classList.add('hidden');
+                
+                // Hide dynamic tabs since the user is gone
+                document.getElementById('btn-tab-friends').classList.add('hidden');
+                document.getElementById('btn-tab-recommend').classList.add('hidden');
+                document.getElementById('btn-tab-distances').classList.add('hidden');
+                switchTab('tab-console');
             }
         }
 
@@ -753,6 +895,45 @@
             
             // ریست کردن اینپوت برای اینکه بشه دوباره همون فایل رو انتخاب کرد
             event.target.value = '';
+        }
+        
+        // Functions for resetting the graph
+        function resetGraphConfirm() {
+            openModal('confirmResetModal');
+        }
+
+        async function executeResetGraph() {
+            closeModal('confirmResetModal');
+            log('در حال پاکسازی کامل گراف...', 'info');
+            
+            try {
+                const res = await fetch('/api/reset', { method: 'POST' });
+                const data = await res.json();
+                
+                if (data.status === 'success') {
+                    log(data.message, 'success');
+                    
+                    // Reset selected node state
+                    selectedNodeId = null;
+                    document.getElementById('no-node-selected').classList.remove('hidden');
+                    document.getElementById('node-details').classList.add('hidden');
+                    
+                    // Hide dynamic tabs
+                    document.getElementById('btn-tab-friends').classList.add('hidden');
+                    document.getElementById('btn-tab-recommend').classList.add('hidden');
+                    document.getElementById('btn-tab-distances').classList.add('hidden');
+                    switchTab('tab-console');
+                    
+                    // Clear input fields
+                    document.querySelectorAll('input[type="text"]').forEach(input => input.value = '');
+                    
+                    loadGraph(); // Reload (which will be empty now)
+                } else {
+                    log(data.message || 'خطا در پاکسازی دیتابیس', 'error');
+                }
+            } catch (err) {
+                log('خطای ارتباط با سرور هنگام پاکسازی', 'error');
+            }
         }
     </script>
 </body>
